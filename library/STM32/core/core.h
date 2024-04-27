@@ -17,6 +17,10 @@ extern "C"
 // 接收缓冲队列最大长度
 #define CORE_RECV_QUEUE_MAX_LEN 16
 
+// 获取是否正在处理消息
+#define CORE_IS_PROCESSING() (core_processing)
+
+extern uint8_t core_processing;
 
 // 发布订阅模型状态
 typedef enum
@@ -56,12 +60,17 @@ CORE_StatusTypeDef CORE_unsubscribe(const char *topic, CORE_callback_t callback)
  * 
  * @param topic 消息主题
  * @param arg 消息数据
- * @param siz 消息数据长度
+ * @param messageSize 消息数据长度
+ * @param sendImmediately  是否立即发送
+ * 
+ * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
+ * 
+ * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
  * 
  * @return CORE_StatusTypeDef
  * 
  */
-CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t siz);
+CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize, uint8_t sendImmediately);
 
 /**
  * @brief 获取所有主题
@@ -95,6 +104,7 @@ CORE_StatusTypeDef CORE_speed(const char *topic, float *speed);
  * 
  */
 CORE_StatusTypeDef CORE_queue_remain(const char *topic, size_t *len);
+
 
 #ifdef __cplusplus
 }

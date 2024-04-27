@@ -7,28 +7,29 @@
 
 typedef struct CORE_msg_list
 {
-    struct CORE_msg_list * next;
-    size_t data_len;
-    uint8_t data[0];// 向下增长
+    struct CORE_msg_list * next;     // 指向下一个消息节点的指针
+    size_t data_len;                 // 数据长度
+    uint8_t data[0];                 // 动态存储数据，向下增长
 } CORE_msg_list_t;
 
 typedef struct CORE_callback_list
 {
-    struct CORE_callback_list * next;
-    CORE_callback_t callback;
+    struct CORE_callback_list * next; // 指向下一个回调节点的指针
+    CORE_callback_t callback;         // 回调函数
 } CORE_callback_list_t;
 
 typedef struct CORE_task_list
 {
-    struct CORE_task_list * next;
-    char topic[CORE_TOPIC_MAX_LEN + 1];
-    CORE_callback_list_t * callback_list;
-    CORE_msg_list_t * msg_list;
+    struct CORE_task_list * next;           // 指向下一个任务节点的指针
+    char topic[CORE_TOPIC_MAX_LEN + 1];     // 主题字符串
+    CORE_callback_list_t * callback_list;   // 回调函数列表指针
+    CORE_msg_list_t * msg_list;             // 消息列表指针
     
-    uint16_t msg_count;
-    float msg_speed;
+    uint16_t msg_count;                     // 消息计数
+    float msg_speed;                        // 消息速率
 } CORE_task_list_t;
 
+// 全局任务列表指针
 CORE_task_list_t * CORE_task_list = NULL;
 
 
@@ -221,12 +222,17 @@ CORE_StatusTypeDef CORE_unsubscribe(const char *topic, CORE_callback_t callback)
  * 
  * @param topic 消息主题
  * @param arg 消息数据
- * @param siz 消息数据长度
+ * @param messageSize 消息数据长度
+ * @param sendImmediately  是否立即发送
+ * 
+ * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
+ * 
+ * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
  * 
  * @return CORE_StatusTypeDef
  * 
  */
-CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t siz)
+CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize, uint8_t sendImmediately)
 {
     return CORE_OK;
 }
