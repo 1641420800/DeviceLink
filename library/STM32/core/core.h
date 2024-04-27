@@ -105,6 +105,14 @@ CORE_StatusTypeDef CORE_speed(const char *topic, float *speed);
  */
 CORE_StatusTypeDef CORE_queue_remain(const char *topic, size_t *len);
 
+/**
+ * @brief 初始化
+ * 
+ * @note 必须在 `main()` 函数中调用。
+ * 
+ */
+void CORE_init(void);
+
 
 #ifdef __cplusplus
 }
