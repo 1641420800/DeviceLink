@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdint.h>
 #ifndef _CORE_H_
 #define _CORE_H_
 
@@ -12,6 +13,9 @@ extern "C"
 
 // 主题最大长度
 #define CORE_TOPIC_MAX_LEN 32
+
+// 接收缓冲队列最大长度
+#define CORE_RECV_QUEUE_MAX_LEN 16
 
 
 // 发布订阅模型状态
@@ -30,12 +34,11 @@ typedef void (*CORE_callback_t)(const char *topic, void *arg, size_t siz);
  * 
  * @param topic 消息主题。如果为 `"*"`，表示订阅所有主题。
  * @param callback 消息回调函数
- * @param len 接收队列长度
  * 
  * @return CORE_StatusTypeDef
  * 
  */
-CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback, size_t len);
+CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback);
 
 /**
  * @brief 取消订阅消息
@@ -81,17 +84,6 @@ CORE_StatusTypeDef CORE_topics(char **topics, size_t *len);
  * 
  */
 CORE_StatusTypeDef CORE_speed(const char *topic, float *speed);
-
-/**
- * @brief 获取队列长度
- * 
- * @param topic 主题
- * @param len 队列长度
- * 
- * @return CORE_StatusTypeDef
- * 
- */
-CORE_StatusTypeDef CORE_queue_len(const char *topic, size_t *len);
 
 /**
  * @brief 获取队列剩余长度
