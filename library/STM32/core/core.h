@@ -1,5 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
 #ifndef _CORE_H_
 #define _CORE_H_
 
@@ -7,6 +5,11 @@
 extern "C"
 {
 #endif
+
+#include <stddef.h>
+#include <stdint.h>
+
+#include "list.h"
 
 // °æ±¾ºÅ
 #define CORE_VERSION "0.0.1-alpha"
