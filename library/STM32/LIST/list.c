@@ -1,10 +1,10 @@
 #include "list.h"
 
 /**
- * @brief æŸ¥æ‰¾æŒ‡å‘æŸèŠ‚ç‚¹çš„æŒ‡é’ˆ
+ * @brief ²éÕÒÖ¸ÏòÄ³½ÚµãµÄÖ¸Õë
  * 
- * @param list é“¾è¡¨å¤´
- * @param node èŠ‚ç‚¹
+ * @param list Á´±íÍ·
+ * @param node ½Úµã
  * 
  * @return void **
  * 
@@ -18,10 +18,10 @@ void ** CORE_get_last(void **list,void *node)
 }
 
 /**
- * @brief æ·»åŠ èŠ‚ç‚¹
+ * @brief Ìí¼Ó½Úµã
  * 
- * @param list é“¾è¡¨å¤´
- * @param node èŠ‚ç‚¹
+ * @param list Á´±íÍ·
+ * @param node ½Úµã
  * 
  * @return CORE_StatusTypeDef
  * 
@@ -37,10 +37,10 @@ CORE_StatusTypeDef CORE_add_node(void **list_head,void *new_node)
 }
 
 /**
- * @brief åˆ é™¤èŠ‚ç‚¹
+ * @brief É¾³ı½Úµã
  * 
- * @param list é“¾è¡¨å¤´
- * @param node èŠ‚ç‚¹
+ * @param list Á´±íÍ·
+ * @param node ½Úµã
  * 
  * @return CORE_StatusTypeDef
  * 

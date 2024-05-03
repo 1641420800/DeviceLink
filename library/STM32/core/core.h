@@ -10,6 +10,7 @@ extern "C"
 #include <stdint.h>
 
 #include "list.h"
+#include "run.h"
 
 // °æ±¾ºÅ
 #define CORE_VERSION "0.0.1-alpha"
