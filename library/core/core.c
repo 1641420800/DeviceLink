@@ -354,6 +354,12 @@ CORE_StatusTypeDef CORE_queue_remain(const char *topic, size_t *len)
     return CORE_OK;
 }
 
+void CORE_run(void * arg)
+{
+    // todo
+
+}
+
 /**
  * @brief 初始化
  * 
@@ -363,5 +369,7 @@ CORE_StatusTypeDef CORE_queue_remain(const char *topic, size_t *len)
  */
 void CORE_init(void)
 {
+    // 绑定主循环服务
+    run_add_task(CORE_run,NULL);
 
 }
