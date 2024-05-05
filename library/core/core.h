@@ -14,10 +14,7 @@ extern "C"
 #include "def.h"
 #include "list.h"
 #include "run.h"
-
-// 发布订阅模型状态
-
-typedef void (*CORE_callback_t)(const char *topic, void *arg, size_t siz);
+#include "timer.h"
 
 /**
  * @brief 订阅消息

@@ -8,8 +8,6 @@ extern "C"
 
 #include "core.h"
 
-typedef void (*run_task_t)(void * arg);
-
 typedef struct RUN_TASK_NODE
 {
     struct RUN_TASK_NODE *next;
@@ -21,7 +19,7 @@ typedef struct RUN_TASK_NODE
  * @brief 运行循环函数
  * 
  */
-void run_loop(void);
+void CORE_Run_loop(void);
 
 /**
  * @brief 添加运行循环任务
@@ -32,7 +30,7 @@ void run_loop(void);
  * @return run_task_node_t* 任务节点
  * 
  */
-run_task_node_t * run_add_task(run_task_t task, void *arg);
+run_task_node_t * CORE_Run_add_task(run_task_t task, void *arg);
 
 /**
  * @brief 移除运行循环任务
@@ -40,7 +38,7 @@ run_task_node_t * run_add_task(run_task_t task, void *arg);
  * @param task 任务节点
  * 
  */
-void run_remove_task(run_task_node_t * node);
+void CORE_Run_remove_task(run_task_node_t * node);
 
 #ifdef __cplusplus
 }

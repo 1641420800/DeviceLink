@@ -36,7 +36,7 @@ void run_free_task_node(run_task_node_t * node)
  * @brief 运行循环函数
  * 
  */
-void run_loop(void)
+void CORE_Run_loop(void)
 {
     run_task_node_t * node = run_task_list;
     while(node)
@@ -55,7 +55,7 @@ void run_loop(void)
  * @return run_task_node_t* 任务节点
  * 
  */
-run_task_node_t * run_add_task(run_task_t task, void *arg)
+run_task_node_t * CORE_Run_add_task(run_task_t task, void *arg)
 {
     CORE_StatusTypeDef status;
     run_task_node_t * node = run_create_task_node(task, arg);
@@ -72,7 +72,7 @@ run_task_node_t * run_add_task(run_task_t task, void *arg)
  * @param task 任务节点
  * 
  */
-void run_remove_task(run_task_node_t * node)
+void CORE_Run_remove_task(run_task_node_t * node)
 {
     CORE_del_node((void**)&run_task_list,node);
     run_free_task_node(node);
