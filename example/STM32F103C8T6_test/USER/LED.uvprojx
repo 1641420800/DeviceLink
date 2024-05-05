@@ -422,6 +422,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\library\core\run.c</FilePath>
             </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\library\core\timer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

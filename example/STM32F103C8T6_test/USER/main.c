@@ -20,7 +20,7 @@ int main(void)
 	CORE_init();
 	while(1)
 	{
-		run_loop();
+		CORE_Run_loop();
 		LED;
 	}
 }

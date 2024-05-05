@@ -76,7 +76,7 @@ void timer_loop(void *arg)
  */
 void CORE_Timer_Init(void)
 {
-    CORE_Run_add_task(timer_loop, NULL);
+    run_add_task(timer_loop, NULL);
 }
 
 /**
@@ -156,7 +156,7 @@ timer_node_t *CORE_Timer_add_task(timer_callback_t callback, void *arg, uint32_t
     node->arg = arg;
     node->interval = interval;
     node->last_time = timerTim;
-    status = CORE_add_node((void**)&timer_list, node);
+    status = CORE_add_node(&timer_list, node);
     if (status != CORE_OK)
     {
         timer_free_node(node);
@@ -187,7 +187,7 @@ timer_node_t *CORE_TimerService_add_task(run_task_t callback, void *arg, uint32_
     node->arg = arg;
     node->interval = interval;
     node->last_time = timerTim;
-    status = CORE_add_node((void**)&timer_list, node);
+    status = CORE_add_node(&timer_list, node);
     if (status != CORE_OK)
     {
         timer_free_node(node);

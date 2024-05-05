@@ -6,6 +6,7 @@
 "..\obj\core.o"
 "..\obj\list.o"
 "..\obj\run.o"
+"..\obj\timer.o"
 "..\obj\delay.o"
 "..\obj\sys.o"
 "..\obj\usart.o"

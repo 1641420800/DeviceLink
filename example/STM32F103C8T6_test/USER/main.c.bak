@@ -20,7 +20,7 @@ int main(void)
 	CORE_init();
 	while(1)
 	{
-		delay_ms(300);		// —” ±300ms
+		CORE_Run_loop();
 		LED;
 	}
 }
