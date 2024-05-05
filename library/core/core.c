@@ -2,9 +2,10 @@
 
 typedef struct CORE_MSG_LIST
 {
-    struct CORE_MSG_LIST *next; // 指向下一个消息节点的指针
-    size_t data_len;            // 数据长度
-    uint8_t data[0];            // 动态存储数据，向下增长
+    struct CORE_MSG_LIST *next;         // 指向下一个消息节点的指针
+    char topic[CORE_TOPIC_MAX_LEN + 1]; // 主题字符串
+    size_t data_len;                    // 数据长度
+    uint8_t data[0];                    // 动态存储数据，向下增长
 } CORE_msg_list_t;
 
 typedef struct CORE_CALLBACK_LIST
@@ -22,7 +23,7 @@ typedef struct CORE_TASK_LIST
     CORE_msg_list_t *msg_list;           // 消息列表指针
 
     uint16_t msg_count; // 消息计数
-    float msg_speed;    // 消息速率
+    uint16_t msg_speed; // 消息速率
 } CORE_task_list_t;
 
 // 全局任务列表指针
@@ -94,10 +95,10 @@ CORE_StatusTypeDef CORE_free_callback_list(CORE_callback_list_t *callback_list)
  * @return CORE_msg_t *
  *
  */
-CORE_msg_list_t *CORE_new_msg(uint8_t *data, size_t data_len)
+CORE_msg_list_t *CORE_new_msg(const char *topic, uint8_t *data, size_t data_len)
 {
     CORE_msg_list_t *msg;
-    if (!data || data_len <= 0)
+    if (!topic || !data || data_len <= 0)
         return NULL;
     msg = (CORE_msg_list_t *)CORE_malloc(sizeof(CORE_msg_list_t) + data_len);
     if (!msg)
@@ -105,6 +106,7 @@ CORE_msg_list_t *CORE_new_msg(uint8_t *data, size_t data_len)
     msg->next = NULL;
     msg->data_len = data_len;
     memcpy(msg->data, data, data_len);
+    strncpy(msg->topic, topic, CORE_TOPIC_MAX_LEN);
     return msg;
 }
 
@@ -156,10 +158,9 @@ CORE_task_list_t *CORE_new_task(const char *topic)
  */
 CORE_task_list_t *CORE_find_task(const char *topic)
 {
-    CORE_task_list_t *task;
+    CORE_task_list_t *task = CORE_task_list;
     if (!topic)
         return NULL;
-    task = CORE_task_list;
     while (task)
     {
         if (strcmp(task->topic, topic) == 0)
@@ -314,7 +315,16 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
     }
     else
     { // 放入队列
-        msg = CORE_new_msg(arg, messageSize);
+        msg = CORE_new_msg(topic, arg, messageSize);
+        if (!msg)
+            return CORE_ERROR;
+        CORE_add_node((void **)&task->msg_list, (void *)msg);
+    }
+
+    task = CORE_find_task("*");
+    if (task)
+    {
+        msg = CORE_new_msg(topic, arg, messageSize);
         if (!msg)
             return CORE_ERROR;
         CORE_add_node((void **)&task->msg_list, (void *)msg);
@@ -324,19 +334,54 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
 }
 
 /**
- * @brief 获取所有主题
+ * @brief 发布字符串消息
  *
- * @param topics 主题数组
- * @param len 主题数组长度
+ * @param topic 消息主题
+ * @param arg 消息数据
+ * @param sendImmediately  是否立即发送
  *
- * @bug 接口设计可能不太合适
+ * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
  *
- * @return CORE_StatusTypeDef
+ * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
  *
  */
-CORE_StatusTypeDef CORE_topics(char **topics, size_t *len)
+CORE_StatusTypeDef CORE_publish_str(const char *topic, const char *arg, uint8_t sendImmediately)
 {
-    return CORE_OK;
+    return CORE_publish(topic, (void *)arg, strlen(arg) + 1, sendImmediately);
+}
+
+/**
+ * @brief 发布整型消息
+ *
+ * @param topic 消息主题
+ * @param arg 消息数据
+ * @param sendImmediately  是否立即发送
+ *
+ * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
+ *
+ * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
+ *
+ */
+CORE_StatusTypeDef CORE_publish_int(const char *topic, int arg, uint8_t sendImmediately)
+{
+    return CORE_publish(topic, (void *)&arg, sizeof(int), sendImmediately);
+}
+
+/**
+ * @brief 发布浮点型消息
+ *
+ * @param topic 消息主题
+ * @param arg 消息数据
+ * @param sendImmediately  是否立即发送
+ *
+ * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
+ *
+ * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
+ *
+ */
+CORE_StatusTypeDef CORE_publish_float(const char *topic, float arg, uint8_t sendImmediately)
+{
+    return CORE_publish(topic, (void *)&arg, sizeof(float), sendImmediately);
 }
 
 /**
@@ -348,35 +393,52 @@ CORE_StatusTypeDef CORE_topics(char **topics, size_t *len)
  * @return CORE_StatusTypeDef
  *
  */
-CORE_StatusTypeDef CORE_speed(const char *topic, float *speed)
+CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed)
 {
-    return CORE_OK;
-}
-
-/**
- * @brief 获取队列剩余长度
- *
- * @param topic 主题
- * @param len 队列剩余长度
- *
- * @todo 是否需要限制队列长度
- *
- * @return CORE_StatusTypeDef
- *
- */
-CORE_StatusTypeDef CORE_queue_remain(const char *topic, size_t *len)
-{
+    CORE_task_list_t *task;
+    if (!topic || !speed)
+        return CORE_ERROR;
+    task = CORE_find_task(topic);
+    if (!task)
+        return CORE_ERROR;
+    *speed = task->msg_speed;
     return CORE_OK;
 }
 
 void CORE_run(void *arg)
 {
-    // todo
+    CORE_task_list_t *task = CORE_task_list;
+    CORE_msg_list_t *msg = NULL;
+    CORE_callback_list_t *callback_list = NULL;
+
+    while (task)
+    {
+        while (task->msg_list)
+        {
+            msg = task->msg_list;
+            callback_list = task->callback_list;
+            task->msg_list = task->msg_list->next;
+            while (callback_list)
+            {
+                CORE_call_callback(callback_list->callback, msg->topic, msg->data, msg->data_len);
+                callback_list = callback_list->next;
+                ++task->msg_count;
+            }
+            CORE_free_msg(msg);
+        }
+        task = task->next;
+    }
 }
 
 void CORE_run_timer(void *arg)
 {
-    // todo
+    CORE_task_list_t *task = CORE_task_list;
+    while (task)
+    {
+        task->msg_speed = task->msg_count;
+        task->msg_count = 0;
+        task = task->next;
+    }
 }
 
 /**
@@ -388,5 +450,5 @@ void CORE_run_timer(void *arg)
 void CORE_init(void)
 {
     CORE_Run_add_task(CORE_run, NULL);
-    CORE_Timer_add_task(CORE_run_timer, NULL, 1);
+    CORE_Timer_add_task(CORE_run_timer, NULL, 1000);
 }

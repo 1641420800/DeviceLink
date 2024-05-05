@@ -21,7 +21,7 @@ extern "C"
 
     /**
      * @brief timer初始化
-     * 
+     *
      */
     void CORE_Timer_Init(void);
 
@@ -130,17 +130,17 @@ extern "C"
 
     /**
      * @brief 暂停一个节点
-     * 
+     *
      * @param node 定时器节点
-     * 
+     *
      */
     CORE_StatusTypeDef CORE_Timer_Pause(timer_node_t *node);
 
     /**
      * @brief 恢复一个节点
-     * 
+     *
      * @param node 定时器节点
-     * 
+     *
      */
     CORE_StatusTypeDef CORE_Timer_Resume(timer_node_t *node);
 
