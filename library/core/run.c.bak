@@ -29,7 +29,7 @@ run_task_node_t * run_create_task_node(run_task_t task, void *arg)
  */
 void run_free_task_node(run_task_node_t * node)
 {
-    if(node) CORE_free(node);
+    if(node) free(node);
 }
 
 /**
