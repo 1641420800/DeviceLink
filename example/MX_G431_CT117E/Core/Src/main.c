@@ -19,14 +19,15 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include "lcd.h"
+#include "core.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,14 +52,109 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void CORE_callback_1(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line0,(u8*)outBuf);
+}
+void CORE_callback_2(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line1,(u8*)outBuf);
+}
+void CORE_callback_3(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line2,(u8*)outBuf);
+}
+void CORE_callback_4(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line3,(u8*)outBuf);
+}
+void CORE_callback_5(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line4,(u8*)outBuf);
+}
+void CORE_callback_6(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line5,(u8*)outBuf);
+}
+void CORE_callback_7(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line6,(u8*)outBuf);
+}
+void CORE_callback_8(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line7,(u8*)outBuf);
+}
+void CORE_callback_9(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line8,(u8*)outBuf);
+}
+void CORE_callback_all(const char *topic, void *arg, size_t siz)
+{
+  static uint32_t i = 0;
+  char outBuf[64];
+  
+  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  
+	LCD_DisplayStringLine(Line9,(u8*)outBuf);
+}
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim->Instance == TIM7)
+  {
+    CORE_Timer_IRQHandler(1);
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -91,20 +187,48 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
-
+  LCD_Init();
+  LCD_Clear(Black);
+  
+	CORE_init();
+	CORE_subscribe("123",CORE_callback_1);
+	CORE_subscribe("456",CORE_callback_2);
+	CORE_subscribe("123",CORE_callback_3);
+	CORE_subscribe("456",CORE_callback_4);
+	CORE_subscribe("123",CORE_callback_5);
+	CORE_subscribe("456",CORE_callback_6);
+	CORE_subscribe("456",CORE_callback_7);
+	CORE_subscribe("123",CORE_callback_8);
+	CORE_subscribe("456",CORE_callback_9);
+	CORE_subscribe("*",CORE_callback_all);
+  
+  
+  HAL_TIM_Base_Start_IT(&htim7);
   /* USER CODE END 2 */
 
-  /* Call init function for freertos objects (in freertos.c) */
-  MX_FREERTOS_Init();
-  /* Start scheduler */
-  osKernelStart();
-
-  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+  #if 1
+		CORE_publish_str("123","abc",0);
+		CORE_publish_str("456","def",0);
+		CORE_Run_loop();
+  #else
+    CORE_callback_1("123","abc",4);
+    CORE_callback_2("456","def",4);
+    CORE_callback_3("123","abc",4);
+    CORE_callback_4("456","def",4);
+    CORE_callback_5("123","abc",4);
+    CORE_callback_6("456","def",4);
+    CORE_callback_7("123","abc",4);
+    CORE_callback_8("456","def",4);
+    CORE_callback_9("123","abc",4);
+    CORE_callback_all("123","abc",4);
+    CORE_callback_all("456","def",4);
+  #endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -120,11 +244,11 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Configure the main internal regulator output voltage
   */
   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -141,6 +265,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -154,40 +279,11 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the peripherals clocks
-  */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
-  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-  {
-    Error_Handler();
-  }
 }
 
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
-/**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM1 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* USER CODE BEGIN Callback 0 */
-
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM1) {
-    HAL_IncTick();
-  }
-  /* USER CODE BEGIN Callback 1 */
-
-  /* USER CODE END Callback 1 */
-}
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -220,5 +316,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
