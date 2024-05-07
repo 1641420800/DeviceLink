@@ -9,15 +9,19 @@ extern "C"
 // 版本号
 #define CORE_VERSION "0.0.1-alpha"
 
+// 内存分配函数
 #define CORE_malloc malloc
+
+// 内存释放函数
 #define CORE_free free
 
 // 主题最大长度
 #define CORE_TOPIC_MAX_LEN 32
 
-// 接收缓冲队列最大长度
-#define CORE_RECV_QUEUE_MAX_LEN 16
+// 日志输出函数 todo
+#define CORE_LOG(...) printf(__VA_ARGS__)
 
+// WEAK 定义
 #ifndef WEAK
 #ifdef __CC_ARM
 #define WEAK __weak
@@ -36,6 +40,7 @@ extern "C"
 #endif
 #endif
 
+  // 状态定义
   typedef enum
   {
     CORE_OK = 0x00U,      /*!< 成功 */
@@ -44,6 +49,7 @@ extern "C"
     CORE_TIMEOUT = 0x03U, /*!< 超时 */
   } CORE_StatusTypeDef;
 
+  // 任务状态
   typedef enum
   {
     CORE_TASK_STOP = 0,     /* 停止 */
@@ -51,8 +57,12 @@ extern "C"
     CORE_TASK_EXECUTING = 2 /* 执行中 */
   } CORE_TaskStatusTypeDef;
 
+  // 回调函数
+  // 订阅回调函数
   typedef void (*CORE_callback_t)(const char *topic, void *arg, size_t siz);
+  // 运行回调函数
   typedef void (*run_task_t)(void *arg);
+  // 定时回调函数
   typedef void (*timer_callback_t)(void *arg);
 
 #ifdef __cplusplus
