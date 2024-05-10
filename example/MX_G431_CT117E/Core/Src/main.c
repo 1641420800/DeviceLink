@@ -60,94 +60,112 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 void CORE_callback_1(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line0,(u8*)outBuf);
 }
 void CORE_callback_2(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line1,(u8*)outBuf);
 }
 void CORE_callback_3(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line2,(u8*)outBuf);
 }
 void CORE_callback_4(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line3,(u8*)outBuf);
 }
 void CORE_callback_5(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line4,(u8*)outBuf);
 }
 void CORE_callback_6(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line5,(u8*)outBuf);
 }
 void CORE_callback_7(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line6,(u8*)outBuf);
 }
 void CORE_callback_8(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line7,(u8*)outBuf);
 }
 void CORE_callback_9(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed(topic,&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line8,(u8*)outBuf);
 }
-void CORE_callback_all(const char *topic, void *arg, size_t siz)
+void CORE_callback_all2(const char *topic, void *arg, size_t siz)
 {
-  static uint32_t i = 0;
   char outBuf[64];
-  
-  sprintf(outBuf,"%s : %u",(char*)arg,i++);
+  uint16_t speed;
+  CORE_speed("*",&speed);
+  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
   
 	LCD_DisplayStringLine(Line9,(u8*)outBuf);
 }
+void CORE_callback_all(const char *topic, void *arg, size_t siz)
+{
+	CORE_subscribe(arg,CORE_callback_all2);
+}
+
+void timer_callback_1(void *arg)
+{
+  char outBuf[64];
+  sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
+  CORE_publish_str("789",outBuf,0);
+
+}
+
+uint32_t CORE_Timer_GetTime_us(void)
+{
+    return TIM7->CNT;
+}
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM7)
@@ -164,7 +182,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  char outBuf[64];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -193,17 +211,18 @@ int main(void)
   LCD_Clear(Black);
   
 	CORE_init();
+	CORE_subscribe("CORE_subscribe",CORE_callback_all);
 	CORE_subscribe("123",CORE_callback_1);
 	CORE_subscribe("456",CORE_callback_2);
 	CORE_subscribe("123",CORE_callback_3);
 	CORE_subscribe("456",CORE_callback_4);
-	CORE_subscribe("123",CORE_callback_5);
-	CORE_subscribe("456",CORE_callback_6);
-	CORE_subscribe("456",CORE_callback_7);
-	CORE_subscribe("123",CORE_callback_8);
-	CORE_subscribe("456",CORE_callback_9);
-	CORE_subscribe("*",CORE_callback_all);
+//	CORE_subscribe("123",CORE_callback_5);
+//	CORE_subscribe("456",CORE_callback_6);
+//	CORE_subscribe("456",CORE_callback_7);
+//	CORE_subscribe("123",CORE_callback_8);
+	CORE_subscribe("789",CORE_callback_9);
   
+  CORE_Timer_add_task(timer_callback_1,NULL,100);
   
   HAL_TIM_Base_Start_IT(&htim7);
   /* USER CODE END 2 */
@@ -213,8 +232,10 @@ int main(void)
   while (1)
   {
   #if 1
-		CORE_publish_str("123","abc",0);
-		CORE_publish_str("456","def",0);
+    sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_us());
+		CORE_publish_str("123",outBuf,0);
+    sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
+		CORE_publish_str("456",outBuf,0);
 		CORE_Run_loop();
   #else
     CORE_callback_1("123","abc",4);

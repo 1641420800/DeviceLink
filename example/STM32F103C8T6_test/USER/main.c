@@ -23,7 +23,6 @@ void CORE_callback_all(const char *topic, void *arg, size_t siz)
 {
 	
 }
-
 int main(void)
 {	
 	delay_init();	   		// 延时函数初始化	  
@@ -36,6 +35,7 @@ int main(void)
 	
 	while(1)
 	{
+  
 		CORE_publish_str("123","1122334",0);
 		CORE_Run_loop();
 		LED;

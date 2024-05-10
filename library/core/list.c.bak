@@ -13,7 +13,7 @@ void ** CORE_get_last(void **list,void *node)
 {
     void ** ret = list;
     if(!list) return NULL;
-    while(ret && *ret != node) ret = *ret;
+    while(*ret != node) ret = *ret;
     return ret;
 }
 

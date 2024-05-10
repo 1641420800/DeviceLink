@@ -1,5 +1,5 @@
 Dependencies for Project 'MX_G431_CT117E', Target 'MX_G431_CT117E': (DO NOT MODIFY !)
-F (startup_stm32g431xx.s)(0x663A753A)(--cpu Cortex-M4.fp -g --apcs=interwork -I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "STM32G431xx SETA 1"--list startup_stm32g431xx.lst --xref -o mx_g431_ct117e\startup_stm32g431xx.o --depend mx_g431_ct117e\startup_stm32g431xx.d)
+F (startup_stm32g431xx.s)(0x663B9902)(--cpu Cortex-M4.fp -g --apcs=interwork -I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "STM32G431xx SETA 1"--list startup_stm32g431xx.lst --xref -o mx_g431_ct117e\startup_stm32g431xx.o --depend mx_g431_ct117e\startup_stm32g431xx.d)
 F (..\Core\Src\lcd.c)(0x619644EC)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\lcd.o --omf_browse mx_g431_ct117e\lcd.crf --depend mx_g431_ct117e\lcd.d)
 I (../Core/Inc/lcd.h)(0x619644EB)
 I (../Core/Inc/main.h)(0x663A6C3E)
@@ -35,7 +35,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x63090A9E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x63090A9E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x63090A9E)
 I (../Core/Inc/fonts.h)(0x619644EB)
-F (../Core/Src/main.c)(0x663A7681)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\main.o --omf_browse mx_g431_ct117e\main.crf --depend mx_g431_ct117e\main.d)
+F (../Core/Src/main.c)(0x663E4ED2)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\main.o --omf_browse mx_g431_ct117e\main.crf --depend mx_g431_ct117e\main.d)
 I (../Core/Inc/main.h)(0x663A6C3E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x63090A9E)
 I (../Core/Inc/stm32g4xx_hal_conf.h)(0x663A6C3D)
@@ -76,7 +76,7 @@ I (../Core/Inc/lcd.h)(0x619644EB)
 I (../../../library/core/core.h)(0x6637B8DF)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../../../library/core/def.h)(0x6638E3E6)
+I (../../../library/core/def.h)(0x663E4D8C)
 I (../../../library/core/list.h)(0x6637B730)
 I (../../../library/core/run.h)(0x6637B73B)
 I (../../../library/core/timer.h)(0x6637B72B)
@@ -825,24 +825,24 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x63090A9E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x63090A9E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x63090A9E)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x63090A9E)
-F (..\..\..\library\core\core.c)(0x6637B90B)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\core.o --omf_browse mx_g431_ct117e\core.crf --depend mx_g431_ct117e\core.d)
+F (..\..\..\library\core\core.c)(0x663E4D93)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\core.o --omf_browse mx_g431_ct117e\core.crf --depend mx_g431_ct117e\core.d)
 I (..\..\..\library\core\core.h)(0x6637B8DF)
 I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\..\..\library\core\def.h)(0x6638E3E6)
+I (..\..\..\library\core\def.h)(0x663E4D8C)
 I (..\..\..\library\core\list.h)(0x6637B730)
 I (..\..\..\library\core\run.h)(0x6637B73B)
 I (..\..\..\library\core\timer.h)(0x6637B72B)
-F (..\..\..\library\core\list.c)(0x66368215)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\list.o --omf_browse mx_g431_ct117e\list.crf --depend mx_g431_ct117e\list.d)
+F (..\..\..\library\core\list.c)(0x663B8F3A)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\list.o --omf_browse mx_g431_ct117e\list.crf --depend mx_g431_ct117e\list.d)
 I (..\..\..\library\core\list.h)(0x6637B730)
 I (..\..\..\library\core\core.h)(0x6637B8DF)
 I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\..\..\library\core\def.h)(0x6638E3E6)
+I (..\..\..\library\core\def.h)(0x663E4D8C)
 I (..\..\..\library\core\run.h)(0x6637B73B)
 I (..\..\..\library\core\timer.h)(0x6637B72B)
 F (..\..\..\library\core\run.c)(0x6637B70D)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\run.o --omf_browse mx_g431_ct117e\run.crf --depend mx_g431_ct117e\run.d)
@@ -852,7 +852,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\..\..\library\core\def.h)(0x6638E3E6)
+I (..\..\..\library\core\def.h)(0x663E4D8C)
 I (..\..\..\library\core\list.h)(0x6637B730)
 I (..\..\..\library\core\timer.h)(0x6637B72B)
 F (..\..\..\library\core\timer.c)(0x663A732A)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../../../library/core-I.\RTE\_MX_G431_CT117E-ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="527" -D_RTE_ -DSTM32G431xx -DUSE_HAL_DRIVER -DSTM32G431xx-o mx_g431_ct117e\timer.o --omf_browse mx_g431_ct117e\timer.crf --depend mx_g431_ct117e\timer.d)
@@ -862,6 +862,6 @@ I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\..\..\library\core\def.h)(0x6638E3E6)
+I (..\..\..\library\core\def.h)(0x663E4D8C)
 I (..\..\..\library\core\list.h)(0x6637B730)
 I (..\..\..\library\core\run.h)(0x6637B73B)

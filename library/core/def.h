@@ -18,6 +18,9 @@ extern "C"
 // 主题最大长度
 #define CORE_TOPIC_MAX_LEN 32
 
+// 消息队列最大长度
+#define CORE_QUEUE_MAX_LEN 16
+
 // 日志输出函数 todo
 #define CORE_LOG(...) printf(__VA_ARGS__)
 
@@ -47,6 +50,7 @@ extern "C"
     CORE_ERROR = 0x01U,   /*!< 失败 */
     CORE_BUSY = 0x02U,    /*!< 忙碌 */
     CORE_TIMEOUT = 0x03U, /*!< 超时 */
+    CORE_EXIST = 0x04U,   /*!< 已存在 */
   } CORE_StatusTypeDef;
 
   // 任务状态

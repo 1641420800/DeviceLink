@@ -2,10 +2,9 @@
 
 typedef struct CORE_MSG_LIST
 {
-    struct CORE_MSG_LIST *next;         // 指向下一个消息节点的指针
-    char topic[CORE_TOPIC_MAX_LEN + 1]; // 主题字符串
-    size_t data_len;                    // 数据长度
-    uint8_t data[0];                    // 动态存储数据，向下增长
+    struct CORE_MSG_LIST *next; // 指向下一个消息节点的指针
+    size_t data_len;            // 数据长度
+    uint8_t data[0];            // 动态存储数据，向下增长
 } CORE_msg_list_t;
 
 typedef struct CORE_CALLBACK_LIST
@@ -21,6 +20,7 @@ typedef struct CORE_TASK_LIST
     char topic[CORE_TOPIC_MAX_LEN + 1];  // 主题字符串
     CORE_callback_list_t *callback_list; // 回调函数列表指针
     CORE_msg_list_t *msg_list;           // 消息列表指针
+    uint16_t msg_list_len;               // 消息列表长度
 
     uint16_t msg_count; // 消息计数
     uint16_t msg_speed; // 消息速率
@@ -28,6 +28,7 @@ typedef struct CORE_TASK_LIST
 
 // 全局任务列表指针
 CORE_task_list_t *CORE_task_list = NULL;
+char currentTopic[CORE_TOPIC_MAX_LEN + 1];  // 主题字符串
 
 /**
  * @brief 新建回调链表节点
@@ -106,7 +107,6 @@ CORE_msg_list_t *CORE_new_msg(const char *topic, uint8_t *data, size_t data_len)
     msg->next = NULL;
     msg->data_len = data_len;
     memcpy(msg->data, data, data_len);
-    strncpy(msg->topic, topic, CORE_TOPIC_MAX_LEN);
     return msg;
 }
 
@@ -143,7 +143,7 @@ CORE_task_list_t *CORE_new_task(const char *topic)
     if (!task)
         return NULL;
     memset(task, 0, sizeof(CORE_task_list_t));
-    strncpy(task->topic, topic, CORE_TOPIC_MAX_LEN);
+    strncpy(task->topic, topic, CORE_TOPIC_MAX_LEN); // 复制主题字符串 超过最大长度时截断
     task->topic[CORE_TOPIC_MAX_LEN] = '\0';
     return task;
 }
@@ -213,12 +213,21 @@ CORE_StatusTypeDef CORE_free_task(CORE_task_list_t *task)
  * @todo 计时部分
  *
  */
-void CORE_call_callback(CORE_callback_t callback, const char *topic, void *arg, size_t siz)
+void CORE_call_callback(CORE_callback_list_t *callback, const char *topic, void *arg, size_t siz)
 {
-    if (!callback)
+    uint32_t tim;
+    if (!callback || !callback->callback)
         return;
+    strcpy(currentTopic,topic);
     // 开始计时
-    callback(topic, arg, siz);
+    tim = CORE_Timer_GetCurrentTime_us();
+    callback->callback(topic, arg, siz);
+    tim = CORE_Timer_GetCurrentTime_us() - tim;
+    // 溢出纠正 todo
+    callback->runTime_us = tim;
+    
+    strcpy(currentTopic,"");
+
     // 结束计时
 }
 
@@ -236,6 +245,8 @@ CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback)
     CORE_task_list_t *task;
     if (!topic || !callback)
         return CORE_ERROR;
+    if (strcmp(topic, "CORE_subscribe") && strcmp(currentTopic, "CORE_subscribe"))
+        CORE_publish_str("CORE_subscribe", topic, 0);
     task = CORE_find_task(topic);
     if (!task)
     {
@@ -243,6 +254,13 @@ CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback)
         if (!task)
             return CORE_ERROR;
         CORE_add_node((void **)&CORE_task_list, (void *)task);
+    }
+    else
+    {
+        if(CORE_find_callback_list(task->callback_list, callback))
+        {
+            return CORE_EXIST;
+        }
     }
     CORE_add_node((void **)&task->callback_list, (void *)CORE_new_callback_list(callback));
     return CORE_OK;
@@ -263,6 +281,8 @@ CORE_StatusTypeDef CORE_unsubscribe(const char *topic, CORE_callback_t callback)
     CORE_callback_list_t *callback_list;
     if (!topic || !callback)
         return CORE_ERROR;
+    if (strcmp(topic, "CORE_unsubscribe") && strcmp(currentTopic, "CORE_unsubscribe"))
+        CORE_publish_str("CORE_unsubscribe", topic, 0);
     task = CORE_find_task(topic);
     if (!task)
         return CORE_ERROR;
@@ -299,6 +319,8 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
     CORE_msg_list_t *msg;
     CORE_task_list_t *task;
     CORE_callback_list_t *callback_list;
+    CORE_StatusTypeDef status;
+
     if (!topic || !arg || !messageSize)
         return CORE_ERROR;
     task = CORE_find_task(topic);
@@ -309,25 +331,24 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
         callback_list = task->callback_list;
         while (callback_list)
         {
-            CORE_call_callback(callback_list->callback, topic, arg, messageSize);
+            CORE_call_callback(callback_list, topic, arg, messageSize);
             callback_list = callback_list->next;
         }
     }
     else
     { // 放入队列
+        if (task->msg_list_len >= CORE_QUEUE_MAX_LEN)
+            return CORE_BUSY;
         msg = CORE_new_msg(topic, arg, messageSize);
         if (!msg)
             return CORE_ERROR;
-        CORE_add_node((void **)&task->msg_list, (void *)msg);
-    }
-
-    task = CORE_find_task("*");
-    if (task)
-    {
-        msg = CORE_new_msg(topic, arg, messageSize);
-        if (!msg)
+        status = CORE_add_node((void **)&task->msg_list, (void *)msg);
+        if (status != CORE_OK)
+        {
+            CORE_free_msg(msg);
             return CORE_ERROR;
-        CORE_add_node((void **)&task->msg_list, (void *)msg);
+        }
+        task->msg_list_len++;
     }
 
     return CORE_OK;
@@ -405,29 +426,40 @@ CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed)
     return CORE_OK;
 }
 
+/**
+ * @brief 执行核心运行循环，处理任务列表中的消息。
+ *
+ * @param arg 传递给函数的参数，本函数中未使用。
+ */
 void CORE_run(void *arg)
 {
+    // 遍历任务列表
+    __disable_irq(); // 关闭总中断
     CORE_task_list_t *task = CORE_task_list;
-    CORE_msg_list_t *msg = NULL;
-    CORE_callback_list_t *callback_list = NULL;
 
     while (task)
     {
-        while (task->msg_list)
+        CORE_msg_list_t *msg = task->msg_list;
+        task->msg_list = NULL;
+        while (msg)
         {
-            msg = task->msg_list;
-            callback_list = task->callback_list;
-            task->msg_list = task->msg_list->next;
+            CORE_msg_list_t *msg_free = msg;
+            CORE_callback_list_t *callback_list = task->callback_list;
+            msg = msg->next;
             while (callback_list)
             {
-                CORE_call_callback(callback_list->callback, msg->topic, msg->data, msg->data_len);
+                __enable_irq(); // 开启总中断
+                CORE_call_callback(callback_list, task->topic, msg_free->data, msg_free->data_len);
+                __disable_irq(); // 关闭总中断
                 callback_list = callback_list->next;
                 ++task->msg_count;
             }
-            CORE_free_msg(msg);
+            CORE_free_msg(msg_free);
+            task->msg_list_len--;
         }
         task = task->next;
     }
+    __enable_irq(); // 开启总中断
 }
 
 void CORE_run_timer(void *arg)
