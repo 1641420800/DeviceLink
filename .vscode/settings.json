@@ -2,6 +2,7 @@
     "files.associations": {
         "core.h": "c",
         "stdint.h": "c",
-        "timer.h": "c"
+        "timer.h": "c",
+        "stm32_hal_core.h": "c"
     }
 }

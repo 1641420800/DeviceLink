@@ -159,7 +159,7 @@
           <Type>0</Type>
           <LineNumber>91</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227700</Address>
+          <Address>134227712</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -196,6 +196,11 @@
           <count>4</count>
           <WinNumber>1</WinNumber>
           <ItemText>timer_list,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>currentNodeCount,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -645,6 +650,30 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\library\core\timer.c</PathWithFileName>
       <FilenameWithoutPath>timer.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>31</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\library\STM32_HAL\STM32_HAL_CORE\stm32_hal_core.c</PathWithFileName>
+      <FilenameWithoutPath>stm32_hal_core.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>32</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\library\core\data.c</PathWithFileName>
+      <FilenameWithoutPath>data.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

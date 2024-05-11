@@ -21,6 +21,9 @@ extern "C"
 // 消息队列最大长度
 #define CORE_QUEUE_MAX_LEN 16
 
+// 数据键值最大长度
+#define CORE_KEY_MAX_LEN 32
+
 // 日志输出函数 todo
 #define CORE_LOG(...) printf(__VA_ARGS__)
 

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "data.h": "c",
+        "core.h": "c",
+        "stdint.h": "c",
+        "timer.h": "c",
+        "run.h": "c",
+        "list.h": "c",
+        "def.h": "c",
+        "string": "c",
+        "array": "c",
+        "string_view": "c"
+    }
+}

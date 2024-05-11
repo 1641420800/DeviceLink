@@ -29,6 +29,7 @@
 "mx_g431_ct117e\list.o"
 "mx_g431_ct117e\run.o"
 "mx_g431_ct117e\timer.o"
+"mx_g431_ct117e\stm32_hal_core.o"
 --strict --scatter "MX_G431_CT117E\MX_G431_CT117E.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

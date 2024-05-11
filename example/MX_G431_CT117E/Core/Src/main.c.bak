@@ -27,7 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "lcd.h"
-#include "core.h"
+#include "stm32_hal_core.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,60 +76,6 @@ void CORE_callback_2(const char *topic, void *arg, size_t siz)
   
 	LCD_DisplayStringLine(Line1,(u8*)outBuf);
 }
-void CORE_callback_3(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line2,(u8*)outBuf);
-}
-void CORE_callback_4(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line3,(u8*)outBuf);
-}
-void CORE_callback_5(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line4,(u8*)outBuf);
-}
-void CORE_callback_6(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line5,(u8*)outBuf);
-}
-void CORE_callback_7(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line6,(u8*)outBuf);
-}
-void CORE_callback_8(const char *topic, void *arg, size_t siz)
-{
-  char outBuf[64];
-  uint16_t speed;
-  CORE_speed(topic,&speed);
-  sprintf(outBuf,"%d %s : %d",siz, (char*)arg,speed);
-  
-	LCD_DisplayStringLine(Line7,(u8*)outBuf);
-}
 void CORE_callback_9(const char *topic, void *arg, size_t siz)
 {
   char outBuf[64];
@@ -157,22 +103,18 @@ void timer_callback_1(void *arg)
 {
   char outBuf[64];
   sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
-  CORE_publish_str("789",outBuf,0);
+  CORE_publish_str("789",outBuf,1);
 
 }
 
-uint32_t CORE_Timer_GetTime_us(void)
+void run_task_1(void *arg)
 {
-    return TIM7->CNT;
+  char outBuf[64];
+  sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
+  CORE_publish_str(arg,outBuf,0);
+
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if(htim->Instance == TIM7)
-  {
-    CORE_Timer_IRQHandler(1);
-  }
-}
 /* USER CODE END 0 */
 
 /**
@@ -182,7 +124,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  char outBuf[64];
+  
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -210,47 +152,25 @@ int main(void)
   LCD_Init();
   LCD_Clear(Black);
   
-	CORE_init();
+  core_init();
+  
 	CORE_subscribe("CORE_subscribe",CORE_callback_all);
 	CORE_subscribe("123",CORE_callback_1);
 	CORE_subscribe("456",CORE_callback_2);
-	CORE_subscribe("123",CORE_callback_3);
-	CORE_subscribe("456",CORE_callback_4);
-//	CORE_subscribe("123",CORE_callback_5);
-//	CORE_subscribe("456",CORE_callback_6);
-//	CORE_subscribe("456",CORE_callback_7);
-//	CORE_subscribe("123",CORE_callback_8);
 	CORE_subscribe("789",CORE_callback_9);
   
-  CORE_Timer_add_task(timer_callback_1,NULL,1);
+  CORE_TimerService_add_task(timer_callback_1,NULL,20);
+  CORE_Run_add_task(run_task_1,"123");
+  CORE_Run_add_task(run_task_1,"456");
   
-  HAL_TIM_Base_Start_IT(&htim7);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  #if 1
-    sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_us());
-		CORE_publish_str("123",outBuf,0);
-    sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
-		CORE_publish_str("456",outBuf,0);
-		CORE_Run_loop();
-    HAL_Delay();
-  #else
-    CORE_callback_1("123","abc",4);
-    CORE_callback_2("456","def",4);
-    CORE_callback_3("123","abc",4);
-    CORE_callback_4("456","def",4);
-    CORE_callback_5("123","abc",4);
-    CORE_callback_6("456","def",4);
-    CORE_callback_7("123","abc",4);
-    CORE_callback_8("456","def",4);
-    CORE_callback_9("123","abc",4);
-    CORE_callback_all("123","abc",4);
-    CORE_callback_all("456","def",4);
-  #endif
+  
+    core_loop();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

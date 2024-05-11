@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32G431xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32G4xx/Include;../Drivers/CMSIS/Include;../../../library/core</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc;../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32G4xx/Include;../Drivers/CMSIS/Include;../../../library/core;..\..\..\library\STM32_HAL\STM32_HAL_CORE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1607,6 +1607,16 @@
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\library\core\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_hal_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\library\STM32_HAL\STM32_HAL_CORE\stm32_hal_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\library\core\data.c</FilePath>
             </File>
           </Files>
         </Group>

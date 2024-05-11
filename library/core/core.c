@@ -29,6 +29,7 @@ typedef struct CORE_TASK_LIST
 // 全局任务列表指针
 CORE_task_list_t *CORE_task_list = NULL;
 char currentTopic[CORE_TOPIC_MAX_LEN + 1]; // 主题字符串
+uint16_t currentNodeCount = 0;
 
 /**
  * @brief 新建回调链表节点
@@ -48,6 +49,7 @@ CORE_callback_list_t *CORE_new_callback_list(CORE_callback_t callback)
         return NULL;
     memset(callback_list, 0, sizeof(CORE_callback_list_t));
     callback_list->callback = callback;
+    ++currentNodeCount;
     return callback_list;
 }
 
@@ -84,6 +86,7 @@ CORE_StatusTypeDef CORE_free_callback_list(CORE_callback_list_t *callback_list)
     if (!callback_list)
         return CORE_ERROR;
     CORE_free(callback_list);
+    --currentNodeCount;
     return CORE_OK;
 }
 
@@ -107,6 +110,7 @@ CORE_msg_list_t *CORE_new_msg(const char *topic, uint8_t *data, size_t data_len)
     msg->next = NULL;
     msg->data_len = data_len;
     memcpy(msg->data, data, data_len);
+    ++currentNodeCount;
     return msg;
 }
 
@@ -123,6 +127,7 @@ CORE_StatusTypeDef CORE_free_msg(CORE_msg_list_t *msg)
     if (!msg)
         return CORE_ERROR;
     CORE_free(msg);
+    --currentNodeCount;
     return CORE_OK;
 }
 
@@ -145,6 +150,7 @@ CORE_task_list_t *CORE_new_task(const char *topic)
     memset(task, 0, sizeof(CORE_task_list_t));
     strncpy(task->topic, topic, CORE_TOPIC_MAX_LEN); // 复制主题字符串 超过最大长度时截断
     task->topic[CORE_TOPIC_MAX_LEN] = '\0';
+    ++currentNodeCount;
     return task;
 }
 
@@ -199,6 +205,7 @@ CORE_StatusTypeDef CORE_free_task(CORE_task_list_t *task)
     }
 
     CORE_free(task);
+    --currentNodeCount;
     return CORE_OK;
 }
 
