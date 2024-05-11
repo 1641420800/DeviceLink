@@ -222,7 +222,7 @@ int main(void)
 //	CORE_subscribe("123",CORE_callback_8);
 	CORE_subscribe("789",CORE_callback_9);
   
-  CORE_Timer_add_task(timer_callback_1,NULL,100);
+  CORE_Timer_add_task(timer_callback_1,NULL,1);
   
   HAL_TIM_Base_Start_IT(&htim7);
   /* USER CODE END 2 */
@@ -237,6 +237,7 @@ int main(void)
     sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
 		CORE_publish_str("456",outBuf,0);
 		CORE_Run_loop();
+    HAL_Delay(1);
   #else
     CORE_callback_1("123","abc",4);
     CORE_callback_2("456","def",4);

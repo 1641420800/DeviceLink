@@ -28,7 +28,7 @@ typedef struct CORE_TASK_LIST
 
 // 全局任务列表指针
 CORE_task_list_t *CORE_task_list = NULL;
-char currentTopic[CORE_TOPIC_MAX_LEN + 1];  // 主题字符串
+char currentTopic[CORE_TOPIC_MAX_LEN + 1]; // 主题字符串
 
 /**
  * @brief 新建回调链表节点
@@ -218,15 +218,15 @@ void CORE_call_callback(CORE_callback_list_t *callback, const char *topic, void 
     uint32_t tim;
     if (!callback || !callback->callback)
         return;
-    strcpy(currentTopic,topic);
+    strcpy(currentTopic, topic);
     // 开始计时
     tim = CORE_Timer_GetCurrentTime_us();
     callback->callback(topic, arg, siz);
     tim = CORE_Timer_GetCurrentTime_us() - tim;
     // 溢出纠正 todo
     callback->runTime_us = tim;
-    
-    strcpy(currentTopic,"");
+
+    strcpy(currentTopic, "");
 
     // 结束计时
 }
@@ -257,7 +257,7 @@ CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback)
     }
     else
     {
-        if(CORE_find_callback_list(task->callback_list, callback))
+        if (CORE_find_callback_list(task->callback_list, callback))
         {
             return CORE_EXIST;
         }
@@ -333,6 +333,7 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
         {
             CORE_call_callback(callback_list, topic, arg, messageSize);
             callback_list = callback_list->next;
+            ++task->msg_count;
         }
     }
     else
@@ -430,11 +431,11 @@ CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed)
  * @brief 执行核心运行循环，处理任务列表中的消息。
  *
  * @param arg 传递给函数的参数，本函数中未使用。
+ * 
  */
 void CORE_run(void *arg)
 {
     // 遍历任务列表
-    __disable_irq(); // 关闭总中断
     CORE_task_list_t *task = CORE_task_list;
 
     while (task)
@@ -448,9 +449,7 @@ void CORE_run(void *arg)
             msg = msg->next;
             while (callback_list)
             {
-                __enable_irq(); // 开启总中断
                 CORE_call_callback(callback_list, task->topic, msg_free->data, msg_free->data_len);
-                __disable_irq(); // 关闭总中断
                 callback_list = callback_list->next;
                 ++task->msg_count;
             }
@@ -459,9 +458,14 @@ void CORE_run(void *arg)
         }
         task = task->next;
     }
-    __enable_irq(); // 开启总中断
 }
 
+/**
+ * @brief 运行计时器
+ *
+ * @param arg 传递给函数的参数，本函数中未使用。
+ *
+ */
 void CORE_run_timer(void *arg)
 {
     CORE_task_list_t *task = CORE_task_list;

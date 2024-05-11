@@ -3,7 +3,7 @@
 <title>Static Call Graph - [MX_G431_CT117E\MX_G431_CT117E.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image MX_G431_CT117E\MX_G431_CT117E.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat May 11 00:44:05 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat May 11 01:19:50 2024
 <BR><P>
 <H3>Maximum Stack Usage =        240 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1050,7 +1050,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CORE_subscribe
 </UL>
 
-<P><STRONG><a name="[b4]"></a>CORE_publish</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, core.o(i.CORE_publish))
+<P><STRONG><a name="[b4]"></a>CORE_publish</STRONG> (Thumb, 118 bytes, Stack size 24 bytes, core.o(i.CORE_publish))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = CORE_publish &rArr; CORE_new_msg &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CORE_new_msg
@@ -1073,7 +1073,7 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5d]"></a>CORE_run</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, core.o(i.CORE_run))
+<P><STRONG><a name="[5d]"></a>CORE_run</STRONG> (Thumb, 80 bytes, Stack size 24 bytes, core.o(i.CORE_run))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = CORE_run &rArr; CORE_call_callback &rArr; strcpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CORE_free_msg
@@ -1131,7 +1131,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;REG_932X_Init
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;REG_932X_Init
 </UL>
 
 <P><STRONG><a name="[c9]"></a>HAL_GPIO_Init</STRONG> (Thumb, 550 bytes, Stack size 56 bytes, stm32g4xx_hal_gpio.o(i.HAL_GPIO_Init))
@@ -1748,7 +1749,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g431xx.o(RESET)
 </UL>
-<P><STRONG><a name="[79]"></a>main</STRONG> (Thumb, 158 bytes, Stack size 64 bytes, main.o(i.main))
+<P><STRONG><a name="[79]"></a>main</STRONG> (Thumb, 164 bytes, Stack size 64 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
 <LI>Call Chain = main &rArr; MX_USART1_UART_Init &rArr; HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
@@ -1766,6 +1767,7 @@ Global Symbols
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CORE_Timer_GetCurrentTime_ms
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CORE_Run_loop
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
