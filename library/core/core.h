@@ -6,6 +6,8 @@ extern "C"
 {
 #endif
 
+#define _DeviceLink_
+
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -18,10 +20,10 @@ extern "C"
 #include "data.h"
 
     /**
-     * @brief ¶©ÔÄÏûÏ¢
+     * @brief è®¢é˜…æ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ¡£Èç¹ûÎª `"*"`£¬±íÊ¾¶©ÔÄËùÓĞÖ÷Ìâ¡£
-     * @param callback ÏûÏ¢»Øµ÷º¯Êı
+     * @param topic æ¶ˆæ¯ä¸»é¢˜ã€‚å¦‚æœä¸º `"*"`ï¼Œè¡¨ç¤ºè®¢é˜…æ‰€æœ‰ä¸»é¢˜ã€‚
+     * @param callback æ¶ˆæ¯å›è°ƒå‡½æ•°
      *
      * @return CORE_StatusTypeDef
      *
@@ -29,10 +31,10 @@ extern "C"
     CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback);
 
     /**
-     * @brief È¡Ïû¶©ÔÄÏûÏ¢
+     * @brief å–æ¶ˆè®¢é˜…æ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ
-     * @param callback ÏûÏ¢»Øµ÷º¯Êı
+     * @param topic æ¶ˆæ¯ä¸»é¢˜
+     * @param callback æ¶ˆæ¯å›è°ƒå‡½æ•°
      *
      * @return CORE_StatusTypeDef
      *
@@ -40,16 +42,16 @@ extern "C"
     CORE_StatusTypeDef CORE_unsubscribe(const char *topic, CORE_callback_t callback);
 
     /**
-     * @brief ·¢²¼ÏûÏ¢
+     * @brief å‘å¸ƒæ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ
-     * @param arg ÏûÏ¢Êı¾İ
-     * @param messageSize ÏûÏ¢Êı¾İ³¤¶È
-     * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+     * @param topic æ¶ˆæ¯ä¸»é¢˜
+     * @param arg æ¶ˆæ¯æ•°æ®
+     * @param messageSize æ¶ˆæ¯æ•°æ®é•¿åº¦
+     * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
      *
-     * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+     * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
      *
-     * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+     * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
      *
      * @return CORE_StatusTypeDef
      *
@@ -57,52 +59,52 @@ extern "C"
     CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize, uint8_t sendImmediately);
 
     /**
-     * @brief ·¢²¼×Ö·û´®ÏûÏ¢
+     * @brief å‘å¸ƒå­—ç¬¦ä¸²æ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ
-     * @param arg ÏûÏ¢Êı¾İ
-     * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+     * @param topic æ¶ˆæ¯ä¸»é¢˜
+     * @param arg æ¶ˆæ¯æ•°æ®
+     * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
      *
-     * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+     * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
      *
-     * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+     * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
      *
      */
     CORE_StatusTypeDef CORE_publish_str(const char *topic, const char *arg, uint8_t sendImmediately);
 
     /**
-     * @brief ·¢²¼ÕûĞÍÏûÏ¢
+     * @brief å‘å¸ƒæ•´å‹æ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ
-     * @param arg ÏûÏ¢Êı¾İ
-     * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+     * @param topic æ¶ˆæ¯ä¸»é¢˜
+     * @param arg æ¶ˆæ¯æ•°æ®
+     * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
      *
-     * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+     * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
      *
-     * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+     * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
      *
      */
     CORE_StatusTypeDef CORE_publish_int(const char *topic, int arg, uint8_t sendImmediately);
 
     /**
-     * @brief ·¢²¼¸¡µãĞÍÏûÏ¢
+     * @brief å‘å¸ƒæµ®ç‚¹å‹æ¶ˆæ¯
      *
-     * @param topic ÏûÏ¢Ö÷Ìâ
-     * @param arg ÏûÏ¢Êı¾İ
-     * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+     * @param topic æ¶ˆæ¯ä¸»é¢˜
+     * @param arg æ¶ˆæ¯æ•°æ®
+     * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
      *
-     * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+     * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
      *
-     * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+     * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
      * 
      */
     CORE_StatusTypeDef CORE_publish_float(const char *topic, float arg, uint8_t sendImmediately);
 
     /**
-     * @brief »ñÈ¡Í¨ĞÅËÙ¶È
+     * @brief è·å–é€šä¿¡é€Ÿåº¦
      *
-     * @param topic Ö÷Ìâ
-     * @param speed Í¨ĞÅËÙ¶È
+     * @param topic ä¸»é¢˜
+     * @param speed é€šä¿¡é€Ÿåº¦
      *
      * @return CORE_StatusTypeDef
      *
@@ -110,9 +112,9 @@ extern "C"
     CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed);
 
     /**
-     * @brief ³õÊ¼»¯
+     * @brief åˆå§‹åŒ–
      *
-     * @note ±ØĞëÔÚ `main()` º¯ÊıÖĞµ÷ÓÃ¡£
+     * @note å¿…é¡»åœ¨ `main()` å‡½æ•°ä¸­è°ƒç”¨ã€‚
      *
      */
     void CORE_init(void);
