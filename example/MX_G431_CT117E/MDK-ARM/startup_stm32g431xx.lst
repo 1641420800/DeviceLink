@@ -680,13 +680,14 @@ ARM Macro Assembler    Page 11
               00001000 
               00005000 
               00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=mx_g431_ct117e\startup_stm32g431xx.d -omx_g431_ct117e\startup_s
-tm32g431xx.o -I.\RTE\_MX_G431_CT117E -ID:\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\
-Include -ID:\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Drivers\CMSIS\Device\ST\STM32G4
-xx\Include --predefine="__UVISION_VERSION SETA 527" --predefine="_RTE_ SETA 1" 
---predefine="STM32G431xx SETA 1" --list=startup_stm32g431xx.lst startup_stm32g4
-31xx.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=mx_g431_ct117e\startup_stm32g431xx.d -omx_g431_ct117e\startu
+p_stm32g431xx.o -I.\RTE\_MX_G431_CT117E -IC:\Users\16414\AppData\Local\Arm\Pack
+s\ARM\CMSIS\6.1.0\CMSIS\Core\Include -IC:\Users\16414\AppData\Local\Arm\Packs\K
+eil\STM32G4xx_DFP\1.6.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include --predefine="
+__UVISION_VERSION SETA 539" --predefine="_RTE_ SETA 1" --predefine="STM32G431xx
+ SETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32g431xx.lst startup_stm3
+2g431xx.s
 
 
 

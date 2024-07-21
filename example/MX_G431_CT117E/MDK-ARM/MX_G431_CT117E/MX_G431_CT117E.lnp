@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu=Cortex-M4.fp.sp
 "mx_g431_ct117e\startup_stm32g431xx.o"
 "mx_g431_ct117e\lcd.o"
 "mx_g431_ct117e\main.o"
@@ -30,6 +30,7 @@
 "mx_g431_ct117e\run.o"
 "mx_g431_ct117e\timer.o"
 "mx_g431_ct117e\stm32_hal_core.o"
+"mx_g431_ct117e\data.o"
 --strict --scatter "MX_G431_CT117E\MX_G431_CT117E.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

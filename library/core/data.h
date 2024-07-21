@@ -33,7 +33,7 @@ extern "C"
      *
      * @return dataItem_t* 数据项指针
      */
-    dataItem_t *data_add(const char *key, uint8_t *data, size_t size);
+    data_node_t *data_add(const char *key, uint8_t *data, size_t size);
 
     /**
      * @brief 获取数据项
@@ -42,14 +42,14 @@ extern "C"
      *
      * @return dataItem_t* 数据项指针
      */
-    dataItem_t *data_get(const char *key);
+    data_node_t *data_get(const char *key);
 
     /**
      * @brief 释放数据项
      *
      * @param item 数据项指针
      */
-    void data_free(dataItem_t *item);
+    void data_free(data_node_t *item);
 
 #ifdef __cplusplus
 }

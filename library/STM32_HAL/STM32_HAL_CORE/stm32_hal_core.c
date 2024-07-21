@@ -17,11 +17,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void core_init(void)
 {
     CORE_init();
+    CORE_Timer_Init();
     HAL_TIM_Base_Start_IT(&htim7);
 }
 
 void core_loop(void)
 {
     CORE_Run_loop();
-    CORE_Timer_Init();
 }

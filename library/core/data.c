@@ -19,19 +19,20 @@ data_node_t *data_new(const char *key, void *data, size_t size)
     if(node == NULL) return NULL;
     uint16_t len = strlen(key) + 1;
     if(len > CORE_KEY_MAX_LEN) len = CORE_KEY_MAX_LEN;
-    node->key = CORE_malloc(len);
-    if(node->key == NULL)
+		char *_key = CORE_malloc(len);
+    if(_key == NULL)
     {
         CORE_free(node);
         return NULL;
     }
-    strncpy(node->key, key, len);
+    strncpy(_key, key, len);
     node->data = data;
     node->size = size;
-    CORE_StatusTypeDef status = CORE_add_node(&data_list, node);
+		node->key  = _key;
+    CORE_StatusTypeDef status = CORE_add_node((void**)&data_list, node);
     if(status != CORE_OK)
     {
-        CORE_free(node->key);
+        CORE_free(_key);
         CORE_free(node);
         return NULL;
     }
@@ -75,11 +76,11 @@ CORE_StatusTypeDef data_delete(const char *key)
     data_node_t *node = data_find(key);
     if(!node) return CORE_ERROR;
     
-    CORE_StatusTypeDef status = CORE_del_node(&data_list, node);
+    CORE_StatusTypeDef status = CORE_del_node((void**)&data_list, node);
 
     if(status != CORE_OK) return CORE_ERROR;
 
-    CORE_free(node->key);
+    CORE_free((void*)node->key);
     CORE_free(node);
 
     return CORE_OK;
@@ -128,6 +129,7 @@ void data_init(void)
  */
 data_node_t *data_add(const char *key, uint8_t *data, size_t size)
 {
+	return NULL;
 }
 
 /**
@@ -139,6 +141,7 @@ data_node_t *data_add(const char *key, uint8_t *data, size_t size)
  */
 data_node_t *data_get(const char *key)
 {
+	return NULL;
 }
 
 /**
