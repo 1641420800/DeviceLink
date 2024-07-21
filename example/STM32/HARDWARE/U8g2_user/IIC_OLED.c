@@ -128,7 +128,7 @@ void oled_u8g2Menu_init(menuItem_cb menuItem)
 	// u8g2_SetFont(&u8g2,u8g2_font_8x13_mf);
 	u8g2_CreateMenu(&u8g2, &u8g2_menu, menuItem);
 	CORE_subscribe("key/value", CORE_callback_u8g2Menu);
-	CORE_subscribe("key/function", CORE_callback_u8g2Menu);
+	CORE_subscribe("str/char", CORE_callback_u8g2Menu);
 	CORE_Run_add_task(task_u8g2Menu, "run");
 	CORE_Timer_add_task(task_u8g2Menu, "timer", 50);
 }

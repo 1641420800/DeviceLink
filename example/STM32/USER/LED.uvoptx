@@ -158,7 +158,7 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>SysTick</ItemText>
+          <ItemText>CORE_task_list</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

@@ -176,7 +176,10 @@ void task_matrixKey(void *arg)
 {
     uint8_t keys = 0;
     keys = get_current_key_value(&matrixKey);
-    CORE_publish_int("str/char", keys, 0);
+    if (keys)
+    {
+        CORE_publish_int("str/char", keys, 0);
+    }
 }
 #endif
 /* ------------------------------------------------------------------------------------------ */
