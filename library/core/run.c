@@ -3,12 +3,12 @@
 run_task_node_t *run_task_list = NULL;
 
 /**
- * @brief 创建运行循环任务节点
+ * @brief 鍒涘缓杩愯寰幆浠诲姟鑺傜偣
  *
- * @param task 任务函数
- * @param arg 任务函数参数
+ * @param task 浠诲姟鍑芥暟
+ * @param arg 浠诲姟鍑芥暟鍙傛暟
  *
- * @return run_task_node_t* 任务节点
+ * @return run_task_node_t* 浠诲姟鑺傜偣
  *
  */
 run_task_node_t *run_create_task_node(run_task_t task, void *arg)
@@ -23,9 +23,9 @@ run_task_node_t *run_create_task_node(run_task_t task, void *arg)
 }
 
 /**
- * @brief 释放运行循环任务节点
+ * @brief 閲婃斁杩愯寰幆浠诲姟鑺傜偣
  *
- * @param node 任务节点
+ * @param node 浠诲姟鑺傜偣
  *
  */
 void run_free_task_node(run_task_node_t *node)
@@ -35,7 +35,7 @@ void run_free_task_node(run_task_node_t *node)
 }
 
 /**
- * @brief 运行循环函数
+ * @brief 杩愯寰幆鍑芥暟
  *
  */
 void CORE_Run_loop(void)
@@ -49,12 +49,12 @@ void CORE_Run_loop(void)
 }
 
 /**
- * @brief 添加运行循环任务
+ * @brief 娣诲姞杩愯寰幆浠诲姟
  *
- * @param task 任务函数
- * @param arg 任务函数参数
+ * @param task 浠诲姟鍑芥暟
+ * @param arg 浠诲姟鍑芥暟鍙傛暟
  *
- * @return run_task_node_t* 任务节点
+ * @return run_task_node_t* 浠诲姟鑺傜偣
  *
  */
 run_task_node_t *CORE_Run_add_task(run_task_t task, void *arg)
@@ -71,9 +71,9 @@ run_task_node_t *CORE_Run_add_task(run_task_t task, void *arg)
 }
 
 /**
- * @brief 移除运行循环任务
+ * @brief 绉婚櫎杩愯寰幆浠诲姟
  *
- * @param task 任务节点
+ * @param task 浠诲姟鑺傜偣
  *
  */
 void CORE_Run_remove_task(run_task_node_t *node)

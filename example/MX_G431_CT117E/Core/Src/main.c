@@ -103,7 +103,7 @@ void timer_callback_1(void *arg)
 {
   char outBuf[64];
   sprintf(outBuf,"%u",CORE_Timer_GetCurrentTime_ms());
-  CORE_publish_str("789",outBuf,1);
+  CORE_publish_str("789",outBuf,0);
 
 }
 
@@ -159,9 +159,9 @@ int main(void)
 	CORE_subscribe("456",CORE_callback_2);
 	CORE_subscribe("789",CORE_callback_9);
   
-  CORE_TimerService_add_task(timer_callback_1,NULL,20);
+  CORE_Timer_add_task(timer_callback_1,NULL,20);
   CORE_Run_add_task(run_task_1,"123");
-  CORE_Run_add_task(run_task_1,"456");
+  CORE_Timer_add_task(run_task_1,"456",10);
   
   /* USER CODE END 2 */
 

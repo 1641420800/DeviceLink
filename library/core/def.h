@@ -6,28 +6,28 @@ extern "C"
 {
 #endif
 
-// °æ±¾ºÅ
+// ç‰ˆæœ¬å·
 #define CORE_VERSION "0.0.1-alpha"
 
-// ÄÚ´æ·ÖÅäº¯Êı
+// å†…å­˜åˆ†é…å‡½æ•°
 #define CORE_malloc malloc
 
-// ÄÚ´æÊÍ·Åº¯Êı
+// å†…å­˜é‡Šæ”¾å‡½æ•°
 #define CORE_free free
 
-// Ö÷Ìâ×î´ó³¤¶È
+// ä¸»é¢˜æœ€å¤§é•¿åº¦
 #define CORE_TOPIC_MAX_LEN 32
 
-// ÏûÏ¢¶ÓÁĞ×î´ó³¤¶È
+// æ¶ˆæ¯é˜Ÿåˆ—æœ€å¤§é•¿åº¦
 #define CORE_QUEUE_MAX_LEN 16
 
-// Êı¾İ¼üÖµ×î´ó³¤¶È
+// æ•°æ®é”®å€¼æœ€å¤§é•¿åº¦
 #define CORE_KEY_MAX_LEN 32
 
-// ÈÕÖ¾Êä³öº¯Êı todo
+// æ—¥å¿—è¾“å‡ºå‡½æ•° todo
 #define CORE_LOG(...) printf(__VA_ARGS__)
 
-// WEAK ¶¨Òå
+// WEAK å®šä¹‰
 #ifndef WEAK
 #ifdef __CC_ARM
 #define WEAK __weak
@@ -46,30 +46,30 @@ extern "C"
 #endif
 #endif
 
-  // ×´Ì¬¶¨Òå
+  // çŠ¶æ€å®šä¹‰
   typedef enum
   {
-    CORE_OK = 0x00U,      /*!< ³É¹¦ */
-    CORE_ERROR = 0x01U,   /*!< Ê§°Ü */
-    CORE_BUSY = 0x02U,    /*!< Ã¦Âµ */
-    CORE_TIMEOUT = 0x03U, /*!< ³¬Ê± */
-    CORE_EXIST = 0x04U,   /*!< ÒÑ´æÔÚ */
+    CORE_OK = 0x00U,      /*!< æˆåŠŸ */
+    CORE_ERROR = 0x01U,   /*!< å¤±è´¥ */
+    CORE_BUSY = 0x02U,    /*!< å¿™ç¢Œ */
+    CORE_TIMEOUT = 0x03U, /*!< è¶…æ—¶ */
+    CORE_EXIST = 0x04U,   /*!< å·²å­˜åœ¨ */
   } CORE_StatusTypeDef;
 
-  // ÈÎÎñ×´Ì¬
+  // ä»»åŠ¡çŠ¶æ€
   typedef enum
   {
-    CORE_TASK_STOP = 0,     /* Í£Ö¹ */
-    CORE_TASK_RUNNING = 1,  /* ÔËĞĞ */
-    CORE_TASK_EXECUTING = 2 /* Ö´ĞĞÖĞ */
+    CORE_TASK_STOP = 0,     /* åœæ­¢ */
+    CORE_TASK_RUNNING = 1,  /* è¿è¡Œ */
+    CORE_TASK_EXECUTING = 2 /* æ‰§è¡Œä¸­ */
   } CORE_TaskStatusTypeDef;
 
-  // »Øµ÷º¯Êı
-  // ¶©ÔÄ»Øµ÷º¯Êı
+  // å›è°ƒå‡½æ•°
+  // è®¢é˜…å›è°ƒå‡½æ•°
   typedef void (*CORE_callback_t)(const char *topic, void *arg, size_t siz);
-  // ÔËĞĞ»Øµ÷º¯Êı
+  // è¿è¡Œå›è°ƒå‡½æ•°
   typedef void (*run_task_t)(void *arg);
-  // ¶¨Ê±»Øµ÷º¯Êı
+  // å®šæ—¶å›è°ƒå‡½æ•°
   typedef void (*timer_callback_t)(void *arg);
 
 #ifdef __cplusplus

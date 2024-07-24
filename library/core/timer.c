@@ -6,9 +6,9 @@ timer_node_t *timer_current = NULL;
 uint32_t timerTim = 0;
 
 /**
- * @brief ĞÂ½¨timer½Úµã
+ * @brief æ–°å»ºtimerèŠ‚ç‚¹
  *
- * @return timer_node_t* ĞÂ½¨µÄtimer½Úµã
+ * @return timer_node_t* æ–°å»ºçš„timerèŠ‚ç‚¹
  *
  */
 timer_node_t *timer_new_node()
@@ -29,9 +29,9 @@ timer_node_t *timer_new_node()
 }
 
 /**
- * @brief ÊÍ·Åtimer½Úµã
+ * @brief é‡Šæ”¾timerèŠ‚ç‚¹
  *
- * @param node timer½Úµã
+ * @param node timerèŠ‚ç‚¹
  *
  */
 void timer_free_node(timer_node_t *node)
@@ -43,7 +43,7 @@ void timer_free_node(timer_node_t *node)
 }
 
 /**
- * @brief timerÑ­»·
+ * @brief timerå¾ªç¯
  *
  */
 void timer_loop(void *arg)
@@ -71,7 +71,7 @@ void timer_loop(void *arg)
 }
 
 /**
- * @brief timer³õÊ¼»¯
+ * @brief timeråˆå§‹åŒ–
  *
  */
 void CORE_Timer_Init(void)
@@ -80,11 +80,11 @@ void CORE_Timer_Init(void)
 }
 
 /**
- * @brief »ñÈ¡µ±Ç°Ê±¼ä µ¥Î»us
+ * @brief è·å–å½“å‰æ—¶é—´ å•ä½us
  *
- * @note Õâ¸öº¯ÊıÓ¦¸ÃÓÉÓ²¼şÆ½Ì¨ÊµÏÖ ÓÃÀ´Ìá¹©us¼¶µÄÊ±¼ä»ù×¼
+ * @note è¿™ä¸ªå‡½æ•°åº”è¯¥ç”±ç¡¬ä»¶å¹³å°å®ç° ç”¨æ¥æä¾›usçº§çš„æ—¶é—´åŸºå‡†
  *
- * @return uint32_t µ±Ç°Ê±¼ä µ¥Î»us
+ * @return uint32_t å½“å‰æ—¶é—´ å•ä½us
  *
  */
 WEAK uint32_t CORE_Timer_GetTime_us(void)
@@ -95,9 +95,9 @@ WEAK uint32_t CORE_Timer_GetTime_us(void)
 /**
  * @brief timer IRQHandler
  *
- * @param ms ¶¨Ê±Æ÷µÄÊ±¼ä¼ä¸ô µ¥Î»ms
+ * @param ms å®šæ—¶å™¨çš„æ—¶é—´é—´éš” å•ä½ms
  *
- * @note Õâ¸öº¯ÊıÓ¦¸ÃÔÚ¶¨Ê±Æ÷ÖĞ¶ÏÖĞµ÷ÓÃ
+ * @note è¿™ä¸ªå‡½æ•°åº”è¯¥åœ¨å®šæ—¶å™¨ä¸­æ–­ä¸­è°ƒç”¨
  *
  */
 void CORE_Timer_IRQHandler(uint32_t ms)
@@ -135,13 +135,13 @@ void CORE_Timer_IRQHandler(uint32_t ms)
 }
 
 /**
- * @brief °ó¶¨Ò»¸ö¶¨Ê±Æ÷»Øµ÷º¯Êı ½«ÔÚÖĞ¶ÏÖĞµ÷ÓÃ
+ * @brief ç»‘å®šä¸€ä¸ªå®šæ—¶å™¨å›è°ƒå‡½æ•° å°†åœ¨ä¸­æ–­ä¸­è°ƒç”¨
  *
- * @param callback ¶¨Ê±Æ÷»Øµ÷º¯Êı
- * @param arg ¶¨Ê±Æ÷»Øµ÷º¯ÊıµÄ²ÎÊı
- * @param interval ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô µ¥Î»ms
+ * @param callback å®šæ—¶å™¨å›è°ƒå‡½æ•°
+ * @param arg å®šæ—¶å™¨å›è°ƒå‡½æ•°çš„å‚æ•°
+ * @param interval å®šæ—¶å™¨æ—¶é—´é—´éš” å•ä½ms
  *
- * @return timer_node_t* ¶¨Ê±Æ÷½Úµã
+ * @return timer_node_t* å®šæ—¶å™¨èŠ‚ç‚¹
  *
  */
 timer_node_t *CORE_Timer_add_task(timer_callback_t callback, void *arg, uint32_t interval)
@@ -167,13 +167,13 @@ timer_node_t *CORE_Timer_add_task(timer_callback_t callback, void *arg, uint32_t
 }
 
 /**
- * @brief °ó¶¨Ò»¸ö¶¨Ê±Æ÷»Øµ÷º¯Êı ½«ÔÚÑ­»·ÖĞµ÷ÓÃ
+ * @brief ç»‘å®šä¸€ä¸ªå®šæ—¶å™¨å›è°ƒå‡½æ•° å°†åœ¨å¾ªç¯ä¸­è°ƒç”¨
  *
- * @param callback ¶¨Ê±Æ÷»Øµ÷º¯Êı
- * @param arg ¶¨Ê±Æ÷»Øµ÷º¯ÊıµÄ²ÎÊı
- * @param interval ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô µ¥Î»ms
+ * @param callback å®šæ—¶å™¨å›è°ƒå‡½æ•°
+ * @param arg å®šæ—¶å™¨å›è°ƒå‡½æ•°çš„å‚æ•°
+ * @param interval å®šæ—¶å™¨æ—¶é—´é—´éš” å•ä½ms
  *
- * @return timer_node_t* ¶¨Ê±Æ÷½Úµã
+ * @return timer_node_t* å®šæ—¶å™¨èŠ‚ç‚¹
  *
  */
 timer_node_t *CORE_TimerService_add_task(run_task_t callback, void *arg, uint32_t interval)
@@ -199,11 +199,11 @@ timer_node_t *CORE_TimerService_add_task(run_task_t callback, void *arg, uint32_
 }
 
 /**
- * @brief ½â°óÒ»¸ö¶¨Ê±Æ÷»Øµ÷º¯Êı
+ * @brief è§£ç»‘ä¸€ä¸ªå®šæ—¶å™¨å›è°ƒå‡½æ•°
  *
- * @param node ¶¨Ê±Æ÷½Úµã
+ * @param node å®šæ—¶å™¨èŠ‚ç‚¹
  *
- * @return CORE_StatusTypeDef ²Ù×÷×´Ì¬
+ * @return CORE_StatusTypeDef æ“ä½œçŠ¶æ€
  *
  */
 CORE_StatusTypeDef CORE_Timer_remove_task(timer_node_t *node)
@@ -215,13 +215,13 @@ CORE_StatusTypeDef CORE_Timer_remove_task(timer_node_t *node)
 }
 
 /**
- * @brief µ÷Õûµ±Ç°Ö´ĞĞÖĞµÄ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô
+ * @brief è°ƒæ•´å½“å‰æ‰§è¡Œä¸­çš„å®šæ—¶å™¨æ—¶é—´é—´éš”
  *
- * @param interval ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô µ¥Î»ms
+ * @param interval å®šæ—¶å™¨æ—¶é—´é—´éš” å•ä½ms
  *
- * @note Õâ¸öº¯ÊıÓ¦¸ÃÔÚ¶¨Ê±Æ÷»Øµ÷ÖĞµ÷ÓÃ
+ * @note è¿™ä¸ªå‡½æ•°åº”è¯¥åœ¨å®šæ—¶å™¨å›è°ƒä¸­è°ƒç”¨
  *
- * @return CORE_StatusTypeDef ²Ù×÷×´Ì¬
+ * @return CORE_StatusTypeDef æ“ä½œçŠ¶æ€
  *
  */
 CORE_StatusTypeDef CORE_Timer_AdjustInterval(uint32_t interval)
@@ -235,12 +235,12 @@ CORE_StatusTypeDef CORE_Timer_AdjustInterval(uint32_t interval)
 }
 
 /**
- * @brief ÉèÖÃ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô
+ * @brief è®¾ç½®å®šæ—¶å™¨æ—¶é—´é—´éš”
  *
- * @param node ¶¨Ê±Æ÷½Úµã
- * @param interval ¶¨Ê±Æ÷Ê±¼ä¼ä¸ô µ¥Î»ms
+ * @param node å®šæ—¶å™¨èŠ‚ç‚¹
+ * @param interval å®šæ—¶å™¨æ—¶é—´é—´éš” å•ä½ms
  *
- * @return CORE_StatusTypeDef ²Ù×÷×´Ì¬
+ * @return CORE_StatusTypeDef æ“ä½œçŠ¶æ€
  *
  */
 CORE_StatusTypeDef CORE_Timer_SetInterval(timer_node_t *node, uint32_t interval)
@@ -254,9 +254,9 @@ CORE_StatusTypeDef CORE_Timer_SetInterval(timer_node_t *node, uint32_t interval)
 }
 
 /**
- * @brief »ñÈ¡µ±Ç°Ö´ĞĞÖĞµÄ¶¨Ê±Æ÷½Úµã
+ * @brief è·å–å½“å‰æ‰§è¡Œä¸­çš„å®šæ—¶å™¨èŠ‚ç‚¹
  *
- * @return timer_node_t* ¶¨Ê±Æ÷½Úµã
+ * @return timer_node_t* å®šæ—¶å™¨èŠ‚ç‚¹
  *
  */
 timer_node_t *CORE_Timer_GetCurrentNode(void)
@@ -265,9 +265,9 @@ timer_node_t *CORE_Timer_GetCurrentNode(void)
 }
 
 /**
- * @brief »ñÈ¡µ±Ç°Ö´ĞĞÖĞµÄ¶¨Ê±Æ÷Ê±¼ä(ms)
+ * @brief è·å–å½“å‰æ‰§è¡Œä¸­çš„å®šæ—¶å™¨æ—¶é—´(ms)
  *
- * @return uint32_t µ±Ç°Ö´ĞĞÖĞµÄ¶¨Ê±Æ÷Ê±¼ä(ms)
+ * @return uint32_t å½“å‰æ‰§è¡Œä¸­çš„å®šæ—¶å™¨æ—¶é—´(ms)
  *
  */
 uint32_t CORE_Timer_GetCurrentTime_ms(void)
@@ -276,11 +276,11 @@ uint32_t CORE_Timer_GetCurrentTime_ms(void)
 }
 
 /**
- * @brief »ñÈ¡µ±Ç°ÔËĞĞÊ±¼ä(us)
+ * @brief è·å–å½“å‰è¿è¡Œæ—¶é—´(us)
  *
- * @note ÒÀÀµÓÚ CORE_Timer_GetTime_us
+ * @note ä¾èµ–äº CORE_Timer_GetTime_us
  *
- * @return uint32_t µ±Ç°ÔËĞĞÊ±¼ä(us)
+ * @return uint32_t å½“å‰è¿è¡Œæ—¶é—´(us)
  *
  */
 uint32_t CORE_Timer_GetCurrentTime_us(void)
@@ -289,9 +289,9 @@ uint32_t CORE_Timer_GetCurrentTime_us(void)
 }
 
 /**
- * @brief ÔİÍ£Ò»¸ö½Úµã
+ * @brief æš‚åœä¸€ä¸ªèŠ‚ç‚¹
  *
- * @param node ¶¨Ê±Æ÷½Úµã
+ * @param node å®šæ—¶å™¨èŠ‚ç‚¹
  *
  */
 CORE_StatusTypeDef CORE_Timer_Pause(timer_node_t *node)
@@ -305,9 +305,9 @@ CORE_StatusTypeDef CORE_Timer_Pause(timer_node_t *node)
 }
 
 /**
- * @brief »Ö¸´Ò»¸ö½Úµã
+ * @brief æ¢å¤ä¸€ä¸ªèŠ‚ç‚¹
  *
- * @param node ¶¨Ê±Æ÷½Úµã
+ * @param node å®šæ—¶å™¨èŠ‚ç‚¹
  *
  */
 CORE_StatusTypeDef CORE_Timer_Resume(timer_node_t *node)

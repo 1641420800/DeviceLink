@@ -2,39 +2,39 @@
 
 typedef struct CORE_MSG_LIST
 {
-    struct CORE_MSG_LIST *next; // Ö¸ÏòÏÂÒ»¸öÏûÏ¢½ÚµãµÄÖ¸Õë
-    size_t data_len;            // Êı¾İ³¤¶È
-    uint8_t data[0];            // ¶¯Ì¬´æ´¢Êı¾İ£¬ÏòÏÂÔö³¤
+    struct CORE_MSG_LIST *next; // æŒ‡å‘ä¸‹ä¸€ä¸ªæ¶ˆæ¯èŠ‚ç‚¹çš„æŒ‡é’ˆ
+    size_t data_len;            // æ•°æ®é•¿åº¦
+    uint8_t data[0];            // åŠ¨æ€å­˜å‚¨æ•°æ®ï¼Œå‘ä¸‹å¢é•¿
 } CORE_msg_list_t;
 
 typedef struct CORE_CALLBACK_LIST
 {
-    struct CORE_CALLBACK_LIST *next; // Ö¸ÏòÏÂÒ»¸ö»Øµ÷½ÚµãµÄÖ¸Õë
-    CORE_callback_t callback;        // »Øµ÷º¯Êı
-    uint16_t runTime_us;             // »Øµ÷º¯ÊıÔËĞĞÊ±¼ä
+    struct CORE_CALLBACK_LIST *next; // æŒ‡å‘ä¸‹ä¸€ä¸ªå›è°ƒèŠ‚ç‚¹çš„æŒ‡é’ˆ
+    CORE_callback_t callback;        // å›è°ƒå‡½æ•°
+    uint16_t runTime_us;             // å›è°ƒå‡½æ•°è¿è¡Œæ—¶é—´
 } CORE_callback_list_t;
 
 typedef struct CORE_TASK_LIST
 {
-    struct CORE_TASK_LIST *next;         // Ö¸ÏòÏÂÒ»¸öÈÎÎñ½ÚµãµÄÖ¸Õë
-    char topic[CORE_TOPIC_MAX_LEN + 1];  // Ö÷Ìâ×Ö·û´®
-    CORE_callback_list_t *callback_list; // »Øµ÷º¯ÊıÁĞ±íÖ¸Õë
-    CORE_msg_list_t *msg_list;           // ÏûÏ¢ÁĞ±íÖ¸Õë
-    uint16_t msg_list_len;               // ÏûÏ¢ÁĞ±í³¤¶È
+    struct CORE_TASK_LIST *next;         // æŒ‡å‘ä¸‹ä¸€ä¸ªä»»åŠ¡èŠ‚ç‚¹çš„æŒ‡é’ˆ
+    char topic[CORE_TOPIC_MAX_LEN + 1];  // ä¸»é¢˜å­—ç¬¦ä¸²
+    CORE_callback_list_t *callback_list; // å›è°ƒå‡½æ•°åˆ—è¡¨æŒ‡é’ˆ
+    CORE_msg_list_t *msg_list;           // æ¶ˆæ¯åˆ—è¡¨æŒ‡é’ˆ
+    uint16_t msg_list_len;               // æ¶ˆæ¯åˆ—è¡¨é•¿åº¦
 
-    uint16_t msg_count; // ÏûÏ¢¼ÆÊı
-    uint16_t msg_speed; // ÏûÏ¢ËÙÂÊ
+    uint16_t msg_count; // æ¶ˆæ¯è®¡æ•°
+    uint16_t msg_speed; // æ¶ˆæ¯é€Ÿç‡
 } CORE_task_list_t;
 
-// È«¾ÖÈÎÎñÁĞ±íÖ¸Õë
+// å…¨å±€ä»»åŠ¡åˆ—è¡¨æŒ‡é’ˆ
 CORE_task_list_t *CORE_task_list = NULL;
-char currentTopic[CORE_TOPIC_MAX_LEN + 1]; // Ö÷Ìâ×Ö·û´®
+char currentTopic[CORE_TOPIC_MAX_LEN + 1]; // ä¸»é¢˜å­—ç¬¦ä¸²
 uint16_t currentNodeCount = 0;
 
 /**
- * @brief ĞÂ½¨»Øµ÷Á´±í½Úµã
+ * @brief æ–°å»ºå›è°ƒé“¾è¡¨èŠ‚ç‚¹
  *
- * @param callback »Øµ÷º¯Êı
+ * @param callback å›è°ƒå‡½æ•°
  *
  * @return CORE_callback_list_t *
  *
@@ -54,10 +54,10 @@ CORE_callback_list_t *CORE_new_callback_list(CORE_callback_t callback)
 }
 
 /**
- * @brief ²éÕÒ»Øµ÷Á´±í½Úµã
+ * @brief æŸ¥æ‰¾å›è°ƒé“¾è¡¨èŠ‚ç‚¹
  *
- * @param callback_list »Øµ÷Á´±í½Úµã
- * @param callback »Øµ÷º¯Êı
+ * @param callback_list å›è°ƒé“¾è¡¨èŠ‚ç‚¹
+ * @param callback å›è°ƒå‡½æ•°
  *
  * @return CORE_callback_list_t *
  *
@@ -74,9 +74,9 @@ CORE_callback_list_t *CORE_find_callback_list(CORE_callback_list_t *callback_lis
 }
 
 /**
- * @brief ÊÍ·Å»Øµ÷Á´±í½Úµã
+ * @brief é‡Šæ”¾å›è°ƒé“¾è¡¨èŠ‚ç‚¹
  *
- * @param callback_list »Øµ÷Á´±í½Úµã
+ * @param callback_list å›è°ƒé“¾è¡¨èŠ‚ç‚¹
  *
  * @return CORE_StatusTypeDef
  *
@@ -91,10 +91,10 @@ CORE_StatusTypeDef CORE_free_callback_list(CORE_callback_list_t *callback_list)
 }
 
 /**
- * @brief ĞÂ½¨ÏûÏ¢½Úµã
+ * @brief æ–°å»ºæ¶ˆæ¯èŠ‚ç‚¹
  *
- * @param data ÏûÏ¢Êı¾İ
- * @param data_len ÏûÏ¢Êı¾İ³¤¶È
+ * @param data æ¶ˆæ¯æ•°æ®
+ * @param data_len æ¶ˆæ¯æ•°æ®é•¿åº¦
  *
  * @return CORE_msg_t *
  *
@@ -115,9 +115,9 @@ CORE_msg_list_t *CORE_new_msg(const char *topic, uint8_t *data, size_t data_len)
 }
 
 /**
- * @brief ÊÍ·ÅÏûÏ¢½Úµã
+ * @brief é‡Šæ”¾æ¶ˆæ¯èŠ‚ç‚¹
  *
- * @param msg ÏûÏ¢½Úµã
+ * @param msg æ¶ˆæ¯èŠ‚ç‚¹
  *
  * @return CORE_StatusTypeDef
  *
@@ -132,9 +132,9 @@ CORE_StatusTypeDef CORE_free_msg(CORE_msg_list_t *msg)
 }
 
 /**
- * @brief ĞÂ½¨ÈÎÎñ½Úµã
+ * @brief æ–°å»ºä»»åŠ¡èŠ‚ç‚¹
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
  *
  * @return CORE_task_t *
  *
@@ -148,16 +148,16 @@ CORE_task_list_t *CORE_new_task(const char *topic)
     if (!task)
         return NULL;
     memset(task, 0, sizeof(CORE_task_list_t));
-    strncpy(task->topic, topic, CORE_TOPIC_MAX_LEN); // ¸´ÖÆÖ÷Ìâ×Ö·û´® ³¬¹ı×î´ó³¤¶ÈÊ±½Ø¶Ï
+    strncpy(task->topic, topic, CORE_TOPIC_MAX_LEN); // å¤åˆ¶ä¸»é¢˜å­—ç¬¦ä¸² è¶…è¿‡æœ€å¤§é•¿åº¦æ—¶æˆªæ–­
     task->topic[CORE_TOPIC_MAX_LEN] = '\0';
     ++currentNodeCount;
     return task;
 }
 
 /**
- * @brief ²éÕÒÈÎÎñ½Úµã
+ * @brief æŸ¥æ‰¾ä»»åŠ¡èŠ‚ç‚¹
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
  *
  * @return CORE_task_t *
  *
@@ -177,9 +177,9 @@ CORE_task_list_t *CORE_find_task(const char *topic)
 }
 
 /**
- * @brief ÊÍ·ÅÈÎÎñ½Úµã
+ * @brief é‡Šæ”¾ä»»åŠ¡èŠ‚ç‚¹
  *
- * @param task ÈÎÎñ
+ * @param task ä»»åŠ¡
  *
  * @return CORE_StatusTypeDef
  *
@@ -210,14 +210,14 @@ CORE_StatusTypeDef CORE_free_task(CORE_task_list_t *task)
 }
 
 /**
- * @brief µ÷ÓÃ»Øµ÷º¯Êı
+ * @brief è°ƒç”¨å›è°ƒå‡½æ•°
  *
- * @param callback »Øµ÷º¯Êı
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param arg ÏûÏ¢Êı¾İ
- * @param siz ÏûÏ¢Êı¾İ³¤¶È
+ * @param callback å›è°ƒå‡½æ•°
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param arg æ¶ˆæ¯æ•°æ®
+ * @param siz æ¶ˆæ¯æ•°æ®é•¿åº¦
  *
- * @todo ¼ÆÊ±²¿·Ö
+ * @todo è®¡æ—¶éƒ¨åˆ†
  *
  */
 void CORE_call_callback(CORE_callback_list_t *callback, const char *topic, void *arg, size_t siz)
@@ -226,23 +226,23 @@ void CORE_call_callback(CORE_callback_list_t *callback, const char *topic, void 
     if (!callback || !callback->callback)
         return;
     strcpy(currentTopic, topic);
-    // ¿ªÊ¼¼ÆÊ±
+    // å¼€å§‹è®¡æ—¶
     tim = CORE_Timer_GetCurrentTime_us();
     callback->callback(topic, arg, siz);
     tim = CORE_Timer_GetCurrentTime_us() - tim;
-    // Òç³ö¾ÀÕı todo
+    // æº¢å‡ºçº æ­£ todo
     callback->runTime_us = tim;
 
     strcpy(currentTopic, "");
 
-    // ½áÊø¼ÆÊ±
+    // ç»“æŸè®¡æ—¶
 }
 
 /**
- * @brief ¶©ÔÄÏûÏ¢
+ * @brief è®¢é˜…æ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param callback ÏûÏ¢»Øµ÷º¯Êı
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param callback æ¶ˆæ¯å›è°ƒå‡½æ•°
  *
  * @return CORE_StatusTypeDef
  *
@@ -274,10 +274,10 @@ CORE_StatusTypeDef CORE_subscribe(const char *topic, CORE_callback_t callback)
 }
 
 /**
- * @brief È¡Ïû¶©ÔÄÏûÏ¢
+ * @brief å–æ¶ˆè®¢é˜…æ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param callback ÏûÏ¢»Øµ÷º¯Êı
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param callback æ¶ˆæ¯å›è°ƒå‡½æ•°
  *
  * @return CORE_StatusTypeDef
  *
@@ -307,16 +307,16 @@ CORE_StatusTypeDef CORE_unsubscribe(const char *topic, CORE_callback_t callback)
 }
 
 /**
- * @brief ·¢²¼ÏûÏ¢
+ * @brief å‘å¸ƒæ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param arg ÏûÏ¢Êı¾İ
- * @param messageSize ÏûÏ¢Êı¾İ³¤¶È
- * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param arg æ¶ˆæ¯æ•°æ®
+ * @param messageSize æ¶ˆæ¯æ•°æ®é•¿åº¦
+ * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
  *
- * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+ * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
  *
- * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+ * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
  *
  * @return CORE_StatusTypeDef
  *
@@ -334,7 +334,7 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
     if (!task)
         return CORE_ERROR;
     if (sendImmediately)
-    { // Á¢¼´·¢ËÍ
+    { // ç«‹å³å‘é€
         callback_list = task->callback_list;
         while (callback_list)
         {
@@ -344,7 +344,7 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
         }
     }
     else
-    { // ·ÅÈë¶ÓÁĞ
+    { // æ”¾å…¥é˜Ÿåˆ—
         if (task->msg_list_len >= CORE_QUEUE_MAX_LEN)
             return CORE_BUSY;
         msg = CORE_new_msg(topic, arg, messageSize);
@@ -363,15 +363,15 @@ CORE_StatusTypeDef CORE_publish(const char *topic, void *arg, size_t messageSize
 }
 
 /**
- * @brief ·¢²¼×Ö·û´®ÏûÏ¢
+ * @brief å‘å¸ƒå­—ç¬¦ä¸²æ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param arg ÏûÏ¢Êı¾İ
- * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param arg æ¶ˆæ¯æ•°æ®
+ * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
  *
- * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+ * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
  *
- * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+ * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
  *
  */
 CORE_StatusTypeDef CORE_publish_str(const char *topic, const char *arg, uint8_t sendImmediately)
@@ -380,15 +380,15 @@ CORE_StatusTypeDef CORE_publish_str(const char *topic, const char *arg, uint8_t 
 }
 
 /**
- * @brief ·¢²¼ÕûĞÍÏûÏ¢
+ * @brief å‘å¸ƒæ•´å‹æ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param arg ÏûÏ¢Êı¾İ
- * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param arg æ¶ˆæ¯æ•°æ®
+ * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
  *
- * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+ * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
  *
- * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+ * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
  *
  */
 CORE_StatusTypeDef CORE_publish_int(const char *topic, int arg, uint8_t sendImmediately)
@@ -397,15 +397,15 @@ CORE_StatusTypeDef CORE_publish_int(const char *topic, int arg, uint8_t sendImme
 }
 
 /**
- * @brief ·¢²¼¸¡µãĞÍÏûÏ¢
+ * @brief å‘å¸ƒæµ®ç‚¹å‹æ¶ˆæ¯
  *
- * @param topic ÏûÏ¢Ö÷Ìâ
- * @param arg ÏûÏ¢Êı¾İ
- * @param sendImmediately  ÊÇ·ñÁ¢¼´·¢ËÍ
+ * @param topic æ¶ˆæ¯ä¸»é¢˜
+ * @param arg æ¶ˆæ¯æ•°æ®
+ * @param sendImmediately  æ˜¯å¦ç«‹å³å‘é€
  *
- * @note Èç¹û sendImmediately  Îª true£¬ÔòÁ¢¼´·¢ËÍ£¬·ñÔò½«·ÅÈë¶ÓÁĞ¡£
+ * @note å¦‚æœ sendImmediately  ä¸º trueï¼Œåˆ™ç«‹å³å‘é€ï¼Œå¦åˆ™å°†æ”¾å…¥é˜Ÿåˆ—ã€‚
  *
- * @warning ÔÚÌØÈ¨Ä£Ê½ÏÂ(IRQ)ÏÂ½÷É÷Ê¹ÓÃÁ¢¼´·¢ËÍ¹¦ÄÜ¡£
+ * @warning åœ¨ç‰¹æƒæ¨¡å¼ä¸‹(IRQ)ä¸‹è°¨æ…ä½¿ç”¨ç«‹å³å‘é€åŠŸèƒ½ã€‚
  *
  */
 CORE_StatusTypeDef CORE_publish_float(const char *topic, float arg, uint8_t sendImmediately)
@@ -414,10 +414,10 @@ CORE_StatusTypeDef CORE_publish_float(const char *topic, float arg, uint8_t send
 }
 
 /**
- * @brief »ñÈ¡Í¨ĞÅËÙ¶È
+ * @brief è·å–é€šä¿¡é€Ÿåº¦
  *
- * @param topic Ö÷Ìâ
- * @param speed Í¨ĞÅËÙ¶È
+ * @param topic ä¸»é¢˜
+ * @param speed é€šä¿¡é€Ÿåº¦
  *
  * @return CORE_StatusTypeDef
  *
@@ -435,14 +435,14 @@ CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed)
 }
 
 /**
- * @brief Ö´ĞĞºËĞÄÔËĞĞÑ­»·£¬´¦ÀíÈÎÎñÁĞ±íÖĞµÄÏûÏ¢¡£
+ * @brief æ‰§è¡Œæ ¸å¿ƒè¿è¡Œå¾ªç¯ï¼Œå¤„ç†ä»»åŠ¡åˆ—è¡¨ä¸­çš„æ¶ˆæ¯ã€‚
  *
- * @param arg ´«µİ¸øº¯ÊıµÄ²ÎÊı£¬±¾º¯ÊıÖĞÎ´Ê¹ÓÃ¡£
+ * @param arg ä¼ é€’ç»™å‡½æ•°çš„å‚æ•°ï¼Œæœ¬å‡½æ•°ä¸­æœªä½¿ç”¨ã€‚
  * 
  */
 void CORE_run(void *arg)
 {
-    // ±éÀúÈÎÎñÁĞ±í
+    // éå†ä»»åŠ¡åˆ—è¡¨
     CORE_task_list_t *task = CORE_task_list;
 
     while (task)
@@ -468,9 +468,9 @@ void CORE_run(void *arg)
 }
 
 /**
- * @brief ÔËĞĞ¼ÆÊ±Æ÷
+ * @brief è¿è¡Œè®¡æ—¶å™¨
  *
- * @param arg ´«µİ¸øº¯ÊıµÄ²ÎÊı£¬±¾º¯ÊıÖĞÎ´Ê¹ÓÃ¡£
+ * @param arg ä¼ é€’ç»™å‡½æ•°çš„å‚æ•°ï¼Œæœ¬å‡½æ•°ä¸­æœªä½¿ç”¨ã€‚
  *
  */
 void CORE_run_timer(void *arg)
@@ -485,9 +485,9 @@ void CORE_run_timer(void *arg)
 }
 
 /**
- * @brief ³õÊ¼»¯
+ * @brief åˆå§‹åŒ–
  *
- * @note ±ØĞëÔÚ `main()` º¯ÊıÖĞµ÷ÓÃ¡£
+ * @note å¿…é¡»åœ¨ `main()` å‡½æ•°ä¸­è°ƒç”¨ã€‚
  *
  */
 void CORE_init(void)
