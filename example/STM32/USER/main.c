@@ -14,7 +14,16 @@
 
 void menuItem()
 {
+
 	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
+
 }
 
 int main(void)
