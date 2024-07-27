@@ -16,6 +16,8 @@
         "stdint.h": "c",
         "stm32f10x_gpio.h": "c",
         "stdlib.h": "c",
-        "devicelink.h": "c"
+        "devicelink.h": "c",
+        "timer.h": "c",
+        "data.h": "c"
     }
 }

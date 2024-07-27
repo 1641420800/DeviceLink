@@ -1,5 +1,6 @@
 #include "IIC_OLED.h"
 #include "Delay.h"
+#include "deviceLink.h"
 
 /*
 	SDA=PB8;
@@ -121,7 +122,20 @@ void task_u8g2Menu(void *arg)
 		u8g2_MenuTime_ISR(&u8g2_menu, 50);
 	}
 }
-void oled_u8g2Menu_init(menuItem_cb menuItem)
+
+
+void menuItem()
+{
+	CORE_task_list_t *task = CORE_getTopic_list("");
+
+	while (task)
+	{
+
+		u8g2_MenuPrintf(u8g2_MenuDrawStr, "%s,%d", task->topic, task->msg_speed);
+		task = CORE_getTopic_list(NULL);
+	}
+}
+void oled_u8g2Menu_init()
 {
 	oled_u8g2_init(&u8g2);
 	u8g2_SetFont(&u8g2, u8g2_font_10x20_tf);

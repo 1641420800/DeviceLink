@@ -1,31 +1,5 @@
 #include "core.h"
 
-typedef struct CORE_MSG_LIST
-{
-    struct CORE_MSG_LIST *next; // 指向下一个消息节点的指针
-    size_t data_len;            // 数据长度
-    uint8_t data[0];            // 动态存储数据，向下增长
-} CORE_msg_list_t;
-
-typedef struct CORE_CALLBACK_LIST
-{
-    struct CORE_CALLBACK_LIST *next; // 指向下一个回调节点的指针
-    CORE_callback_t callback;        // 回调函数
-    uint16_t runTime_us;             // 回调函数运行时间
-} CORE_callback_list_t;
-
-typedef struct CORE_TASK_LIST
-{
-    struct CORE_TASK_LIST *next;         // 指向下一个任务节点的指针
-    char topic[CORE_TOPIC_MAX_LEN + 1];  // 主题字符串
-    CORE_callback_list_t *callback_list; // 回调函数列表指针
-    CORE_msg_list_t *msg_list;           // 消息列表指针
-    uint16_t msg_list_len;               // 消息列表长度
-
-    uint16_t msg_count; // 消息计数
-    uint16_t msg_speed; // 消息速率
-} CORE_task_list_t;
-
 // 全局任务列表指针
 CORE_task_list_t *CORE_task_list = NULL;
 char currentTopic[CORE_TOPIC_MAX_LEN + 1]; // 主题字符串
@@ -70,6 +44,42 @@ CORE_callback_list_t *CORE_find_callback_list(CORE_callback_list_t *callback_lis
             return callback_list;
         callback_list = callback_list->next;
     }
+    return NULL;
+}
+
+/**
+ * @brief 获取所有话题的列表
+ *
+ * @param head 话题需要包含的字符串 NULL为继续匹配
+ *
+ * @return char * 本次匹配到的话题
+ *
+ */
+CORE_task_list_t *CORE_getTopic_list(char *head)
+{
+    static char *_head = NULL;
+    static CORE_task_list_t *task = NULL;
+    CORE_task_list_t *ret = NULL;
+    if (head)
+    {
+        _head = head;
+        task = CORE_task_list;
+    }
+
+    if (!_head)
+        return NULL;
+
+    while (task)
+    {
+        if (strstr(task->topic, _head) != NULL)
+        {
+            ret = task;
+        }
+        task = task->next;
+        if (ret)
+            return ret;
+    }
+
     return NULL;
 }
 
@@ -438,7 +448,7 @@ CORE_StatusTypeDef CORE_speed(const char *topic, uint16_t *speed)
  * @brief 执行核心运行循环，处理任务列表中的消息。
  *
  * @param arg 传递给函数的参数，本函数中未使用。
- * 
+ *
  */
 void CORE_run(void *arg)
 {

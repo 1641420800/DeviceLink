@@ -12,17 +12,12 @@
 #include "IIC_OLED.h"
 #include "matrixKey.h"
 
-void menuItem()
-{
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-}
-
 int main(void)
 {
 	deviceLink_init();
 	delay_init();
 	gpio_init();
-	oled_u8g2Menu_init(menuItem);
+	oled_u8g2Menu_init();
 	matrixKey_init_def(); // 矩阵键盘初始化
 
 	while (1)

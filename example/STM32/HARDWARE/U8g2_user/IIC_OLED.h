@@ -9,7 +9,7 @@
 
 #if oled_u8g2_DeviceLink_on
 #include "core.h"
-void oled_u8g2Menu_init(menuItem_cb menuItem);
+void oled_u8g2Menu_init(void);
 #else
 void oled_u8g2_init(u8g2_t *u8g2);
 #endif

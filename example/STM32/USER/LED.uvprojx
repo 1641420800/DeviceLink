@@ -809,6 +809,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\DeviceLink\deviceLink.c</FilePath>
             </File>
+            <File>
+              <FileName>com.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\library\core\com.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
