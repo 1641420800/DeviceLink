@@ -1036,8 +1036,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_menu.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_menu.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_ui.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_ui.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1048,8 +1048,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_selector.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_selector.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiCore.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiCore.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1060,8 +1060,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_effect.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_effect.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiLayer.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiLayer.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1072,8 +1072,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_drawChart.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_drawChart.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiList.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiList.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1084,8 +1084,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_drawStr.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_drawStr.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiPaintingFrame.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiPaintingFrame.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1096,8 +1096,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_drawValueBar.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_drawValueBar.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiStarrySky.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiStarrySky.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1108,8 +1108,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_keys.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_keys.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiText.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiText.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1120,20 +1120,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_itemValue.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_itemValue.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>7</GroupNumber>
-      <FileNumber>72</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_meun_drawPic.c</PathWithFileName>
-      <FilenameWithoutPath>u8g2_meun_drawPic.c</FilenameWithoutPath>
+      <PathWithFileName>..\HARDWARE\U8g2_user\u8g2_uiDeviceLink.c</PathWithFileName>
+      <FilenameWithoutPath>u8g2_uiDeviceLink.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1147,7 +1135,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>73</FileNumber>
+      <FileNumber>72</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1159,7 +1147,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>74</FileNumber>
+      <FileNumber>73</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1171,7 +1159,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>75</FileNumber>
+      <FileNumber>74</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1183,7 +1171,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>76</FileNumber>
+      <FileNumber>75</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1195,7 +1183,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>77</FileNumber>
+      <FileNumber>76</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1207,7 +1195,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>78</FileNumber>
+      <FileNumber>77</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

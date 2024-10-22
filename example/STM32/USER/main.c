@@ -9,21 +9,17 @@
 #include "gpio.h"
 
 #include "deviceLink.h"
-#include "IIC_OLED.h"
+#include "u8g2_ui.h"
 #include "matrixKey.h"
 
-void menuItem()
+
+u8g2Ui_t* u8g2Ui_found()
 {
+	u8g2Ui_t* u8g2Ui = new_u8g2Ui();
+	
+	new_u8g2Ui_starrySky(u8g2Ui,20);
 
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-	u8g2_MenuPrintf(u8g2_MenuDrawStr, "Hello");
-
+	return u8g2Ui;
 }
 
 int main(void)
@@ -31,7 +27,7 @@ int main(void)
 	deviceLink_init();
 	delay_init();
 	gpio_init();
-	oled_u8g2Menu_init(menuItem);
+	oled_u8g2Ui_init(u8g2Ui_found());
 	matrixKey_init_def(); // 矩阵键盘初始化
 
 	while (1)

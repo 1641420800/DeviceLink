@@ -15,7 +15,7 @@
 #include "core.h"
 #endif
 #if GPIO_u8g2Menu_on
-#include "u8g2_menu.h"
+#include "u8g2_ui.h"
 #endif
 
 void gpio_init(void);

@@ -730,49 +730,44 @@
               <FilePath>..\HARDWARE\U8g2_user\IIC_OLED.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_menu.c</FileName>
+              <FileName>u8g2_ui.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_menu.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_ui.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_selector.c</FileName>
+              <FileName>u8g2_uiCore.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_selector.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiCore.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_effect.c</FileName>
+              <FileName>u8g2_uiLayer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_effect.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiLayer.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_drawChart.c</FileName>
+              <FileName>u8g2_uiList.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_drawChart.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiList.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_drawStr.c</FileName>
+              <FileName>u8g2_uiPaintingFrame.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_drawStr.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiPaintingFrame.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_drawValueBar.c</FileName>
+              <FileName>u8g2_uiStarrySky.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_drawValueBar.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiStarrySky.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_keys.c</FileName>
+              <FileName>u8g2_uiText.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_keys.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiText.c</FilePath>
             </File>
             <File>
-              <FileName>u8g2_meun_itemValue.c</FileName>
+              <FileName>u8g2_uiDeviceLink.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_itemValue.c</FilePath>
-            </File>
-            <File>
-              <FileName>u8g2_meun_drawPic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\U8g2_user\u8g2_meun_drawPic.c</FilePath>
+              <FilePath>..\HARDWARE\U8g2_user\u8g2_uiDeviceLink.c</FilePath>
             </File>
           </Files>
         </Group>

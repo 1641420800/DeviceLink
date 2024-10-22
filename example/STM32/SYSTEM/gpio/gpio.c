@@ -10,18 +10,18 @@ void task_gpio_keys(void *arg)
 	key[1] = KEY_2;
 	key[2] = KEY_3;
 
-	if (key[0] == 0 && keyLog[0] != 0)
-	{
-		CORE_publish_int("key/value", MENU_Key_Up, 0);
-	}
-	if (key[1] == 0 && keyLog[1] != 0)
-	{
-		CORE_publish_int("key/value", MENU_Key_Down, 0);
-	}
-	if (key[2] == 0 && keyLog[2] != 0)
-	{
-		CORE_publish_int("key/value", MENU_Key_Enter, 0);
-	}
+//	if (key[0] == 0 && keyLog[0] != 0)
+//	{
+//		CORE_publish_int("key/value", MENU_Key_Up, 0);
+//	}
+//	if (key[1] == 0 && keyLog[1] != 0)
+//	{
+//		CORE_publish_int("key/value", MENU_Key_Down, 0);
+//	}
+//	if (key[2] == 0 && keyLog[2] != 0)
+//	{
+//		CORE_publish_int("key/value", MENU_Key_Enter, 0);
+//	}
 
 	keyLog[0] = key[0];
 	keyLog[1] = key[1];
