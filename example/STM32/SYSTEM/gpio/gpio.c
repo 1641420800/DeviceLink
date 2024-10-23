@@ -1,50 +1,70 @@
 #include "gpio.h"
 
-void task_gpio_keys(void *arg)
+void task_gpio_key(void *arg)
 {
-	static uint8_t keyLog[4] = {0};
-	uint8_t key[4];
+	key_t *key = (key_t *)arg;
+	key_msg_t msg;
 
-	key[0] = KEY_1;
-	key[1] = KEY_2;
-	key[2] = KEY_3;
+	msg.name = key->name;
 
-	if (key[0] == 0 && keyLog[0] != 0)
+	uint8_t val = GPIO_ReadInputDataBit(key->GPIOx, key->GPIO_Pin);
+
+	if (val == 0 && key->valLog != 0)
 	{
-		CORE_publish_int("input/key", 0, 0);
+		msg.event = KEY_DOWN;
+		CORE_publish("input/key", &msg, sizeof(msg), 0);
 	}
-	if (key[1] == 0 && keyLog[1] != 0)
+	if (val != 0 && key->valLog == 0)
 	{
-		CORE_publish_int("input/key", 1, 0);
-	}
-	if (key[2] == 0 && keyLog[2] != 0)
-	{
-		CORE_publish_int("input/key", 2, 0);
+		msg.event = KEY_UP;
+		CORE_publish("input/key", &msg, sizeof(msg), 0);
 	}
 
-	keyLog[0] = key[0];
-	keyLog[1] = key[1];
-	keyLog[2] = key[2];
+	key->valLog = val;
 }
 
+void CORE_key_init(char *key_name, GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+	// 检查输入参数是否为空
+	if (!key_name || !GPIOx)
+		return;
+	// 验证GPIOx和GPIO_Pin参数的有效性
+	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+	assert_param(IS_GPIO_PIN(GPIO_Pin));
+
+	key_t *key = (key_t *)CORE_malloc(sizeof(key_t));
+	// 检查内存分配是否成功
+	if (!key)
+		return;
+
+	key->GPIOx = GPIOx;
+	key->GPIO_Pin = GPIO_Pin;
+	key->valLog = 1;
+	strcpy(key->name, key_name);
+
+	// 使能PA、PB、PC端口时钟以及AFIO时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+	// 禁用JTAG，释放PA13, PA14, PA15引脚
+	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+
+	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_StructInit(&GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	// 根据设定参数初始化GPIO
+	GPIO_Init(GPIOx, &GPIO_InitStruct);
+
+	// 将按键任务添加到定时器任务列表中
+	CORE_Timer_add_task(task_gpio_key, key, 20);
+}
 void gpio_init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); // 使能PA端口时钟
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能PB端口时钟
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE); // 使能PC端口时钟
+	CORE_key_init("key0", GPIOA, GPIO_Pin_0);
+	CORE_key_init("key1", GPIOA, GPIO_Pin_1);
+	CORE_key_init("key2", GPIOA, GPIO_Pin_2);
 
-	GPIO_SetBits(GPIOC, GPIO_Pin_13); // 输出高
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;		  // 端口配置
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  // 推挽输出
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // IO口速度为50MHz
-	GPIO_Init(GPIOC, &GPIO_InitStructure);			  // 根据设定参数初始化GPIOC
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2; // 端口配置
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;						// 推挽输出
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;					// IO口速度为50MHz
-	GPIO_Init(GPIOA, &GPIO_InitStructure);								// 根据设定参数初始化GPIOC
-
-	CORE_Timer_add_task(task_gpio_keys, NULL, 20);
 }

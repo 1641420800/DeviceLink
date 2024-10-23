@@ -18,17 +18,18 @@ void CORE_callback(const char *topic, void *arg, size_t siz)
 {
 	if (!strcmp(topic, "input/key"))
 	{
-		switch(*(int*)arg)
+		key_msg_t *key = (key_msg_t *)arg;
+		if (!strcmp(key->name, "key0"))
 		{
-			case 0:
-				u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,2);
-				break;
-			case 1:
-				u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,20);
-				break;
-			case 2:
-				u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,40);
-				break;
+			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,2);
+		}
+		else if (!strcmp(key->name, "key1"))
+		{
+			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,20);
+		}
+		else if (!strcmp(key->name, "key2"))
+		{
+			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky,200);
 		}
 	}
 }
