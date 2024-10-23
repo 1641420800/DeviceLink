@@ -208,8 +208,20 @@ void u8g2Ui_starrySky_setMaximumQuantity(void *p, size_t maximumQuantity)
         // todo
         return;
     }
+    _p->stars = (u8g2_stars_t *)u8g2Ui_realloc(_p->stars, sizeof(u8g2_stars_t) * maximumQuantity);
+		if(!_p->stars)
+		{
+        _p->maximumQuantity = 0;
+        return;
+		}
+		if(maximumQuantity > _p->maximumQuantity)
+		{
+			for(int i = _p->maximumQuantity; i < maximumQuantity; ++i)
+			{
+					_p->stars[i].effective = 0;
+			}
+		}
     _p->maximumQuantity = maximumQuantity;
-    _p->stars = (u8g2_stars_t *)u8g2Ui_realloc(_p->stars, sizeof(u8g2_stars_t) * _p->maximumQuantity);
 }
 u8g2_uint_t u8g2Ui_starrySky_getDir(void *p)
 {

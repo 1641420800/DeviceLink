@@ -4,7 +4,7 @@ typedef struct CORE_MSG_LIST
 {
     struct CORE_MSG_LIST *next; // 指向下一个消息节点的指针
     size_t data_len;            // 数据长度
-    uint8_t data[0];            // 动态存储数据，向下增长
+    uint8_t data[1];            // 动态存储数据，向下增长
 } CORE_msg_list_t;
 
 typedef struct CORE_CALLBACK_LIST

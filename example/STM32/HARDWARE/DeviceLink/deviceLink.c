@@ -15,7 +15,7 @@ void deviceLink_init(void)
 {
 	CORE_init();
 	CORE_Timer_Init();
-    registerTimer(1,deviceLink_tim_IRQ);
+	registerTimer(1,deviceLink_tim_IRQ);
 }
 
 void deviceLink_loop(void)

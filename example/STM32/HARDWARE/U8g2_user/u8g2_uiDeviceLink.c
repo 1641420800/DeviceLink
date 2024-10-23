@@ -17,10 +17,10 @@ void task_u8g2Ui(void *arg)
 }
 void oled_u8g2Ui_init(u8g2Ui_t *p)
 {
-	u8g2Ui_init(p);
-	u8g2Ui_p = p;
 	CORE_Run_add_task(task_u8g2Ui, "run");
 	CORE_Timer_add_task(task_u8g2Ui, "timer", 50);
+	u8g2Ui_init(p);
+	u8g2Ui_p = p;
 }
 
 #endif

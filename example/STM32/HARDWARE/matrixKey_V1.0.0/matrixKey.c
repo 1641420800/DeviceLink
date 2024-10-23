@@ -178,7 +178,7 @@ void task_matrixKey(void *arg)
     keys = get_current_key_value(&matrixKey);
     if (keys)
     {
-        CORE_publish_int("str/char", keys, 0);
+        CORE_publish_int("input/char", keys, 0);
     }
 }
 #endif
@@ -240,7 +240,7 @@ uint8_t matrixKey_init(matrixKey_t *matrixKey, uint8_t col_count, uint8_t row_co
     matrixKey->hardware_init_func();
 
 #if matrixKey_DeviceLink_on
-    CORE_Timer_add_task(task_matrixKey, NULL, 50);
+    CORE_TimerService_add_task(task_matrixKey, NULL, 50);
 #endif
 
     return 0;
