@@ -1,3 +1,4 @@
 Load "..\\OBJ\\LED.axf" 
-Erase Done.Programming Done.Verify OK.Application running ...
-Flash Load finished at 23:52:26
+RDDI-DAP Error
+Error: Flash Download failed  -  Target DLL has been cancelled
+Flash Load finished at 17:12:32

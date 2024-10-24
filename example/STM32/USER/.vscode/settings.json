@@ -27,6 +27,8 @@
         "type_traits": "c",
         "xmemory": "c",
         "xstring": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "button.h": "c",
+        "timer.h": "c"
     }
 }

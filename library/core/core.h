@@ -22,7 +22,7 @@ extern "C"
     /**
      * @brief 订阅消息
      *
-     * @param topic 消息主题。如果为 `"*"`，表示订阅所有主题。
+     * @param topic 消息主题
      * @param callback 消息回调函数
      *
      * @return CORE_StatusTypeDef
@@ -96,7 +96,7 @@ extern "C"
      * @note 如果 sendImmediately  为 true，则立即发送，否则将放入队列。
      *
      * @warning 在特权模式下(IRQ)下谨慎使用立即发送功能。
-     * 
+     *
      */
     CORE_StatusTypeDef CORE_publish_float(const char *topic, float arg, uint8_t sendImmediately);
 

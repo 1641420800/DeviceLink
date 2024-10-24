@@ -66,5 +66,4 @@ void gpio_init(void)
 	CORE_key_init("key0", GPIOA, GPIO_Pin_0);
 	CORE_key_init("key1", GPIOA, GPIO_Pin_1);
 	CORE_key_init("key2", GPIOA, GPIO_Pin_2);
-
 }
