@@ -22,15 +22,15 @@ void CORE_callback(const char *topic, void *arg, size_t siz)
 	{
 		button_msg_t *button = (button_msg_t *)arg;
 		u8g2Ui_text_set_text(u8g2Ui_text, "%s %d %d", button->name, button->event, button->click_count);
-		if (!strcmp(button->name, "key0"))
+		if (!strcmp(button->name, "key0") && button->event == BUTTON_CLICKED)
 		{
 			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky, 2);
 		}
-		else if (!strcmp(button->name, "key1"))
+		else if (!strcmp(button->name, "key1") && button->event == BUTTON_CLICKED)
 		{
 			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky, 20);
 		}
-		else if (!strcmp(button->name, "key2"))
+		else if (!strcmp(button->name, "key2") && button->event == BUTTON_CLICKED)
 		{
 			u8g2Ui_starrySky_setMaximumQuantity(u8g2Ui_starrySky, 100);
 		}
